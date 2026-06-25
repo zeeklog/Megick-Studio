@@ -20,7 +20,6 @@ const STATIC_PUBLIC_SITEMAP_ENTRIES: SitemapEntry[] = [
   { path: "/", priority: 1, changefreq: "daily" },
   { path: "/official", priority: 0.9, changefreq: "daily" },
   { path: "/templates", priority: 0.8, changefreq: "daily" },
-  { path: "/about", priority: 0.6, changefreq: "monthly" },
   { path: "/privacy", priority: 0.3, changefreq: "yearly" },
   { path: "/terms", priority: 0.3, changefreq: "yearly" },
   { path: DEFAULT_SEO_IMAGE_PATH, priority: 0.4, changefreq: "monthly" },

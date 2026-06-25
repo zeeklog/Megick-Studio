@@ -109,11 +109,6 @@ export function Footer() {
                 </a>
               </li>
               <li>
-                <Link to="/about" className="transition-opacity hover:opacity-70">
-                  {t("footer.about")}
-                </Link>
-              </li>
-              <li>
                 <Link to="/privacy" className="transition-opacity hover:opacity-70">
                   {t("footer.privacy")}
                 </Link>
@@ -141,7 +136,7 @@ export function Footer() {
             >
               Megick
             </a>
-            . {t("footer.companyLegal")}. {t("footer.rights")}
+            . {t("footer.rights")}
           </p>
           <p>
             {t("footer.crafted")}{" "}

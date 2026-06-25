@@ -79,7 +79,6 @@ export const enMessages = {
   "nav.getStarted": "Get started",
   "nav.toggleMenu": "Toggle menu",
   "nav.templates": "Templates",
-  "nav.about": "About",
   "nav.aiStudio": "AI Studio",
   "nav.socialLink": "Social link",
 
@@ -89,10 +88,8 @@ export const enMessages = {
   "footer.company": "Company",
   "footer.iosApp": "iOS App",
   "footer.gallery": "Gallery",
-  "footer.about": "About",
   "footer.privacy": "Privacy",
   "footer.terms": "Terms",
-  "footer.companyLegal": "MagickApi LLC",
   "footer.rights": "All rights reserved.",
   "footer.crafted": "Crafted with magic",
 
@@ -105,7 +102,6 @@ export const enMessages = {
   "home.glaze.brand": "Megick Studio",
   "home.glaze.nav.projects": "Templates",
   "home.glaze.nav.studio": "Studio",
-  "home.glaze.nav.about": "About",
   "home.glaze.availability": "Taking on creative projects for 2026",
   "home.glaze.timeSuffix": "in Shanghai",
   "home.glaze.timeCity": "Shanghai",
@@ -1446,40 +1442,6 @@ export const enMessages = {
   "job.openOriginal": "Open original",
   "job.notAvailable": "Output not available yet.",
 
-  "about.title": "About Megick",
-  "about.description":
-    "Empower creativity with next-generation AI, turning ideas into stunning reality in seconds.",
-  "about.story.title": "Our Story",
-  "about.story.content":
-    "Megick was born from a simple idea: everyone should have the power to create professional-grade visuals without a steep learning curve. We built an AI Studio that combines advanced generative models with an intuitive workflow, helping ideas become polished images and videos in seconds.",
-  "about.company.title": "MagickApi LLC",
-  "about.company.content":
-    "MagickApi LLC is a Wyoming-registered AI creative technology company in the United States. Through Megick, we provide reliable image and video generation workflows for creative teams, growing businesses, developers, and professional creators. Our focus is production-ready creative infrastructure: dependable model access, clear workflows, high-quality output handling, and tools that help teams move from campaign ideas to usable visual assets with confidence.",
-  "about.mission.title": "Our Mission",
-  "about.mission.content":
-    "To bridge the gap between imagination and creation, providing creators with the most accessible and powerful AI creative toolkit.",
-  "about.contact.title": "Contact",
-  "about.contact.business": "Business partnerships",
-  "about.contact.support": "Complaints and after-sales support",
-  "about.contact.feedback": "Questions, suggestions, and product experience",
-
-  "about.why.title": "Why Choose Megick",
-  "about.why.item1.title": "Lightning-Fast AI Generation",
-  "about.why.item1.desc":
-    "Our optimized inference pipeline delivers HD images in seconds and video clips in under a minute — no more waiting hours for creative iterations.",
-  "about.why.item2.title": "Production-Ready Quality",
-  "about.why.item2.desc":
-    "Up to 4K resolution output with commercial licensing included. Megick is trusted by creative teams, content creators, and design studios for production use.",
-  "about.why.item3.title": "Prompt Drafting Workflow",
-  "about.why.item3.desc":
-    "Built-in prompt helpers keep creative direction clear across languages, reducing the barrier to consistent, high-quality generation results.",
-  "about.why.item4.title": "Multi-Platform Workflow",
-  "about.why.item4.desc":
-    "Web and desktop workflows help teams create anytime, anywhere. Media library organization keeps generated assets easy to review and reuse.",
-
-  "about.team.title": "Our Team",
-  "about.team.content":
-    "Megick is built by a distributed team of AI researchers, software engineers, and creative professionals spanning multiple time zones. We believe in democratizing creative AI — making professional-grade image and video generation accessible to everyone, regardless of technical background. Our team combines expertise in diffusion models, video generation, and cloud infrastructure to deliver a reliable, fast, and delightful creative experience.",
 
   "privacy.title": "Privacy Policy",
   "privacy.lastUpdated": "Last updated: April 29, 2026",
@@ -1530,7 +1492,7 @@ export const enMessages = {
     "By using Megick, you agree to these Terms of Service. Please read them carefully. Megick is a global AI creative service, and you should comply with applicable laws, regulations, and platform rules based on your location and the context of your content usage.",
   "terms.section1.title": "1. Your Agreement to These Terms",
   "terms.section1.content":
-    "These Terms form a legally binding agreement between you and MagickApi LLC. By accessing or using the Services, you agree to be bound by these Terms. If you do not agree, you must immediately stop using the Services. Your use is also subject to our Privacy Policy and any additional guidelines posted on the Platform.",
+    "These Terms form a legally binding agreement between you and Megick. By accessing or using the Services, you agree to be bound by these Terms. If you do not agree, you must immediately stop using the Services. Your use is also subject to our Privacy Policy and any additional guidelines posted on the Platform.",
   "terms.section1.items":
     "You must accept all terms before using the Services.;The Privacy Policy and other guidelines are incorporated by reference.;We may update these Terms to reflect changes in practices, legal requirements, or business operations.;Material changes will be notified via the Platform or email. Continued use after changes constitutes acceptance.",
   "terms.section2.title": "2. Account and Registration",
@@ -1572,7 +1534,7 @@ export const enMessages = {
   "terms.section9.items": "",
   "terms.section10.title": "10. Indemnification",
   "terms.section10.content":
-    "You agree to defend, indemnify, and hold harmless MagickApi LLC, our parents, subsidiaries, affiliates, licensors, and third-party partners, and each of their respective officers, directors, employees, and agents, from and against any claims, damages, losses, liabilities, costs, and expenses arising from your use of the Services or your violation of these Terms.",
+    "You agree to defend, indemnify, and hold harmless Megick, our parents, subsidiaries, affiliates, licensors, and third-party partners, and each of their respective officers, directors, employees, and agents, from and against any claims, damages, losses, liabilities, costs, and expenses arising from your use of the Services or your violation of these Terms.",
   "terms.section10.items": "",
   "terms.section11.title": "11. Dispute Resolution and Governing Law",
   "terms.section11.content":

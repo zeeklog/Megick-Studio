@@ -81,16 +81,13 @@ export const jaMessages = {
   "nav.templates": "テンプレート",
   "nav.socialLink": "ソーシャルリンク",
   "nav.aiStudio": "AI スタジオ",
-  "nav.about": "概要",
   "footer.description": "次世代 AI で創造性を強化し、アイデアを数秒で驚くべき現実に変えます。",
   "footer.product": "製品",
   "footer.company": "会社",
   "footer.iosApp": "iOS アプリ",
   "footer.gallery": "ギャラリー",
-  "footer.about": "About",
   "footer.privacy": "プライバシー",
   "footer.terms": "規約",
-  "footer.companyLegal": "MagickApi LLC",
   "footer.rights": "無断転載を禁じます。",
   "footer.crafted": "魔法で作られた",
   "home.meta.title": "Megick - AI 画像とビデオで魔法を作成",
@@ -100,7 +97,6 @@ export const jaMessages = {
   "home.glaze.brand": "Megick Studio",
   "home.glaze.nav.projects": "テンプレート",
   "home.glaze.nav.studio": "Studio",
-  "home.glaze.nav.about": "About",
   "home.glaze.availability": "2026年に向けてクリエイティブプロジェクトに挑戦",
   "home.glaze.timeSuffix": "(Shanghai",
   "home.glaze.timeCity": "Shanghai",
@@ -1416,37 +1412,7 @@ export const jaMessages = {
   "job.generatedAlt": "生成された出力",
   "job.openOriginal": "オリジナルを開く",
   "job.notAvailable": "出力はまだ利用できません。",
-  "about.title": "Megick",
-  "about.description": "次世代 AI で創造力を強化し、アイデアを数秒で驚くべき現実に変えます。",
-  "about.story.title": "私たちのストーリー",
-  "about.story.content":
-    "Megick は、簡単なアイデアから生まれました。「誰もが、急な学習曲線を必要とせずにプロ グレードのビジュアルを作成する力を備えるべきだ」というものです。私たちは、高度な生成モデルと直感的なワークフローを組み合わせた AI Studio を構築し、アイデアが数秒で洗練された画像やビデオになるよう支援しました。",
-  "about.company.title": "MagickApi LLC",
-  "about.company.content":
-    "MagickApi LLC は、米国ワイオミング州に登録された AI クリエイティブ テクノロジー企業です。 Megick を通じて、当社は国境を越えたコマース チーム、成長するビジネス、開発者、プロのクリエイターに信頼性の高い画像とビデオの生成ワークフローを提供します。私たちが焦点を当てているのは、プロダクション対応のクリエイティブ インフラストラクチャです。信頼できるモデル アクセス、明確なワークフロー、商用グレードの出力処理、チームが自信を持ってキャンペーンのアイデアから使用可能なビジュアル アセットに移行できるように支援するツールです。",
-  "about.mission.title": "私たちの使命",
-  "about.mission.content":
-    "想像力と創造の間のギャップを埋めるために、最もアクセスしやすく強力な AI クリエイティブ ツールキットをクリエイターに提供します。",
-  "about.contact.title": "お問い合わせ",
-  "about.contact.business": "業務提携",
-  "about.contact.support": "苦情およびアフターサポート",
-  "about.contact.feedback": "質問、提案、製品体験",
-  "about.why.title": "Megick",
-  "about.why.item1.title": "超高速 AI 生成",
-  "about.why.item1.desc":
-    "最適化された推論パイプラインは、HD 画像を数秒で、ビデオ クリップを 1 分以内に配信します。クリエイティブな反復に何時間も待つ必要はありません。",
-  "about.why.item2.title": "制作に使える品質",
-  "about.why.item2.desc":
-    "最大 4K 解像度の出力。Megick は、クリエイティブチーム、コンテンツクリエーター、デザインスタジオから制作用途で信頼されています。",
-  "about.why.item3.title": "プロンプト下書きワークフロー",
-  "about.why.item3.desc":
-    "内蔵のプロンプト補助は、どの言語でも創造的な方向性を明確に保ち、一貫した高品質の生成結果を得るためのハードルを下げます。",
-  "about.why.item4.title": "マルチプラットフォーム ワークフロー",
-  "about.why.item4.desc":
-    "Web とデスクトップのワークフローで、チームはいつでも制作できます。メディアライブラリは生成アセットの確認と再利用を簡単にします。",
-  "about.team.title": "私たちのチーム",
-  "about.team.content":
-    "Megick は、複数のタイムゾーンにまたがる AI 研究者、ソフトウェア エンジニア、クリエイティブな専門家からなる分散チームによって構築されています。私たちは、クリエイティブ AI を民主化し、技術的な背景に関係なく、誰もがプロレベルの画像やビデオの生成にアクセスできるようにすることを信じています。私たちのチームは、拡散モデル、ビデオ生成、クラウド インフラストラクチャの専門知識を組み合わせて、信頼性が高く、高速で、楽しいクリエイティブ エクスペリエンスを提供します。",
+
   "privacy.title": "プライバシー ポリシー",
   "privacy.lastUpdated": "最終更新日: 2026 年 4 月 29 日",
   "privacy.intro":
@@ -1496,7 +1462,7 @@ export const jaMessages = {
     "Megick を使用すると、これらの利用規約に同意したことになります。必ずお読みください。 Megick はグローバルな AI クリエイティブ サービスであり、所在地とコンテンツ使用の状況に基づいて、適用される法律、規制、プラットフォームのルールに従う必要があります。",
   "terms.section1.title": "1. これらの規約への同意",
   "terms.section1.content":
-    "これらの規約は、お客様と MagickApi LLC との間の法的拘束力のある契約を形成します。サービスにアクセスまたは使用することにより、お客様は本規約に拘束されることに同意したものとみなされます。同意しない場合は、直ちにサービスの使用を停止する必要があります。お客様の使用には、当社のプライバシー ポリシーおよびプラットフォームに掲載される追加ガイドラインも適用されます。",
+    "これらの規約は、お客様と Megick との間の法的拘束力のある契約を形成します。サービスにアクセスまたは使用することにより、お客様は本規約に拘束されることに同意したものとみなされます。同意しない場合は、直ちにサービスの使用を停止する必要があります。お客様の使用には、当社のプライバシー ポリシーおよびプラットフォームに掲載される追加ガイドラインも適用されます。",
   "terms.section1.items":
     "サービスを使用する前に、すべての規約に同意する必要があります。;プライバシー ポリシーおよびその他のガイドラインは、参照により組み込まれます。;当社は、慣行、法的要件、または事業運営の変更を反映するために、本規約を更新することがあります。;重大な変更は、プラットフォームまたは電子メールで通知されます。変更後も継続して使用することにより、承認されたとみなされます。",
   "terms.section2.title": "2. アカウントと登録",
@@ -1538,7 +1504,7 @@ export const jaMessages = {
   "terms.section9.items": "",
   "terms.section10.title": "10. 補償",
   "terms.section10.content":
-    "お客様は、MagickApi LLC、当社の親会社、子会社、関連会社、ライセンサー、第三者パートナー、およびそれぞれの役員、取締役、従業員、代理人を、お客様によるサービスの使用または本規約の違反から生じるあらゆる請求、損害、損失、責任、コスト、費用から防御し、補償し、免責することに同意します。",
+    "お客様は、Megick、当社の親会社、子会社、関連会社、ライセンサー、第三者パートナー、およびそれぞれの役員、取締役、従業員、代理人を、お客様によるサービスの使用または本規約の違反から生じるあらゆる請求、損害、損失、責任、コスト、費用から防御し、補償し、免責することに同意します。",
   "terms.section10.items": "",
   "terms.section11.title": "11. 紛争解決と準拠法",
   "terms.section11.content":

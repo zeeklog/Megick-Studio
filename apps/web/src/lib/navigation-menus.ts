@@ -20,7 +20,6 @@ export interface NavigationMenuItem {
 }
 
 const defaultNavigationLabelKeys: Record<string, TranslationKey> = {
-  about: "nav.about",
   studio: "nav.aiStudio",
   templates: "nav.templates",
 };
@@ -48,17 +47,6 @@ export const DEFAULT_HEADER_MENU_ITEMS: NavigationMenuItem[] = [
     isActive: true,
     sortOrder: 30,
     metadata: { dashboardDefault: true },
-  },
-  {
-    id: "default-header-about",
-    area: "HEADER",
-    code: "about",
-    label: "About",
-    labelEn: "About",
-    href: "/about",
-    requiresAuth: false,
-    isActive: true,
-    sortOrder: 60,
   },
 ];
 

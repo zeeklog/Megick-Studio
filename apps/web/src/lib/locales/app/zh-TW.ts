@@ -80,16 +80,13 @@ export const zhTWMessages = {
   "nav.templates": "範本中心",
   "nav.socialLink": "社群連結",
   "nav.aiStudio": "AI 工作室",
-  "nav.about": "關於",
   "footer.description": "透過下一代人工智慧賦予創造力，在幾秒鐘內將想法變成令人驚嘆的現實。",
   "footer.product": "產品",
   "footer.company": "公司",
   "footer.iosApp": "iOS 應用程式",
   "footer.gallery": "畫廊",
-  "footer.about": "關於",
   "footer.privacy": "隱私",
   "footer.terms": "條款",
-  "footer.companyLegal": "MagickApi LLC",
   "footer.rights": "版權所有。",
   "footer.crafted": "魔法製作",
   "home.meta.title": "Megick - 用人工智慧影像和影片創造魔法",
@@ -99,7 +96,6 @@ export const zhTWMessages = {
   "home.glaze.brand": "Megick Studio",
   "home.glaze.nav.projects": "模板",
   "home.glaze.nav.studio": "Studio",
-  "home.glaze.nav.about": "關於",
   "home.glaze.availability": "承接2026年創意專案",
   "home.glaze.timeSuffix": "in Shanghai",
   "home.glaze.timeCity": "Shanghai",
@@ -1344,36 +1340,7 @@ export const zhTWMessages = {
   "job.generatedAlt": "產生的輸出",
   "job.openOriginal": "開啟原版",
   "job.notAvailable": "輸出尚不可用。",
-  "about.title": "關於 Megick",
-  "about.description": "透過下一代人工智慧賦予創造力，在幾秒鐘內將想法變成令人驚嘆的現實。",
-  "about.story.title": "我們的故事",
-  "about.story.content":
-    "Megick 的誕生源自於一個簡單的想法：每個人都應該有能力創造專業級的視覺效果，而無需陡峭的學習曲線。我們建立了 AI Studio，它將先進的生成模型與直覺的工作流程相結合，幫助想法在幾秒鐘內變成精美的圖像和影片。",
-  "about.company.title": "MagickApi LLC",
-  "about.company.content":
-    "MagickApi LLC 是一家註冊於美國懷俄明州的 AI 創意科技公司。透過 Megick，我們為跨境商務團隊、成長型企業、開發人員和專業創作者提供可靠的圖像與影片生成工作流程。我們專注於可投入生產的創意基礎設施：穩定的模型存取、清晰的工作流程、商業級輸出處理，以及協助團隊自信地從活動創意轉化為可用視覺資產的工具。",
-  "about.mission.title": "我們的使命",
-  "about.mission.content": "彌合想像與創作之間的差距，為創作者提供最便捷、最強大的AI創意工具包。",
-  "about.contact.title": "聯絡方式",
-  "about.contact.business": "商業夥伴關係",
-  "about.contact.support": "投訴與售後支援",
-  "about.contact.feedback": "問題、建議與產品體驗",
-  "about.why.title": "為什麼選擇Megick",
-  "about.why.item1.title": "閃電般的人工智慧生成",
-  "about.why.item1.desc":
-    "我們優化的推理管道可在幾秒鐘內提供 HD 圖像，在一分鐘內提供視頻剪輯 - 無需再等待創意迭代時間。",
-  "about.why.item2.title": "Pro 就緒品質",
-  "about.why.item2.desc":
-    "高達 4K 解析度輸出。Megick 受到創意團隊、內容創作者和設計工作室的信賴，可用於生產用途。",
-  "about.why.item3.title": "提示詞草稿工作流程",
-  "about.why.item3.desc":
-    "內建提示詞助手可協助你用不同語言保持清晰創意方向，降低獲得一致、高品質生成結果的門檻。",
-  "about.why.item4.title": "多平台工作流程",
-  "about.why.item4.desc":
-    "Web 與桌面工作流程支援團隊隨時創作，媒體庫讓生成素材易於審閱與複用。",
-  "about.team.title": "我們的團隊",
-  "about.team.content":
-    "Megick 由跨越多個時區的人工智慧研究人員、軟體工程師和創意專業人士組成的分散式團隊所建構。我們相信創意人工智慧的民主化——讓每個人都可以產生專業級的圖像和視頻，無論技術背景如何。我們的團隊結合了傳播模型、視訊生成和雲端基礎設施的專業知識，提供可靠、快速和令人愉悅的創意體驗。",
+
   "privacy.title": "隱私權政策",
   "privacy.lastUpdated": "最後更新時間：2026 年 4 月 29 日",
   "privacy.intro":
@@ -1422,7 +1389,7 @@ export const zhTWMessages = {
     "使用 Megick 即表示您同意本服務條款。請仔細閱讀。 Megick是一項全球性的人工智慧創意服務，您應根據您所在的位置和內容使用情境，遵守適用的法律、法規和平台規則。",
   "terms.section1.title": "1. 您同意本條款",
   "terms.section1.content":
-    "本條款構成您與 MagickApi LLC 之間具有法律約束力的協議。存取或使用服務即表示您同意受本條款約束。如果您不同意，您必須立即停止使用本服務。您的使用也須遵守我們的隱私權政策以及平台上發布的任何其他指南。",
+    "本條款構成您與 Megick 之間具有法律約束力的協議。存取或使用服務即表示您同意受本條款約束。如果您不同意，您必須立即停止使用本服務。您的使用也須遵守我們的隱私權政策以及平台上發布的任何其他指南。",
   "terms.section1.items":
     "在使用本服務之前，您必須接受所有條款。 ；隱私權政策和其他指南透過引用併入。 ；我們可能會更新這些條款，以反映實踐、法律要求或業務運營的變化。 ；重大變更將透過平台或電子郵件通知。變更後繼續使用即表示接受。",
   "terms.section2.title": "2. 帳戶與註冊",
@@ -1462,7 +1429,7 @@ export const zhTWMessages = {
   "terms.section9.items": "",
   "terms.section10.title": "10. 賠償",
   "terms.section10.content":
-    "您同意為 MagickApi LLC、我們的母公司、子公司、關聯公司、授權人和第三方合作夥伴及其各自的高級職員、董事、員工和代理人辯護、賠償並使其免受因您使用服務或違反這些條款而產生的任何索賠、損害、損失、責任、成本和開支。",
+    "您同意為 Megick、我們的母公司、子公司、關聯公司、授權人和第三方合作夥伴及其各自的高級職員、董事、員工和代理人辯護、賠償並使其免受因您使用服務或違反這些條款而產生的任何索賠、損害、損失、責任、成本和開支。",
   "terms.section10.items": "",
   "terms.section11.title": "十一、爭議解決及適用法律",
   "terms.section11.content":

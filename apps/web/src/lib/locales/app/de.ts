@@ -82,17 +82,14 @@ export const deMessages = {
   "nav.templates": "Vorlagen",
   "nav.socialLink": "Social-Media-Link",
   "nav.aiStudio": "KI-Studio",
-  "nav.about": "Über uns",
   "footer.description":
     "Fördern Sie Ihre Kreativität mit KI der nächsten Generation und verwandeln Sie Ideen in Sekundenschnelle in atemberaubende Realität.",
   "footer.product": "Produkt",
   "footer.company": "Firma",
   "footer.iosApp": "iOS App",
   "footer.gallery": "Galerie",
-  "footer.about": "Über",
   "footer.privacy": "Datenschutz",
   "footer.terms": "Bedingungen",
-  "footer.companyLegal": "MagickApi LLC",
   "footer.rights": "Alle Rechte vorbehalten.",
   "footer.crafted": "Mit Magie gefertigt",
   "home.meta.title": "Megick – Erschaffen Sie Magie mit KI-Bildern und -Videos",
@@ -104,7 +101,6 @@ export const deMessages = {
   "home.glaze.brand": "Megick Studio",
   "home.glaze.nav.projects": "Vorlagen",
   "home.glaze.nav.studio": "Studio",
-  "home.glaze.nav.about": "Über",
   "home.glaze.availability": "Übernahme kreativer Projekte für 2026",
   "home.glaze.timeSuffix": "in Shanghai",
   "home.glaze.timeCity": "Shanghai",
@@ -1457,38 +1453,7 @@ export const deMessages = {
   "job.generatedAlt": "Generierte Ausgabe",
   "job.openOriginal": "Original öffnen",
   "job.notAvailable": "Ausgabe noch nicht verfügbar.",
-  "about.title": "Über Megick",
-  "about.description":
-    "Fördern Sie Ihre Kreativität mit KI der nächsten Generation und verwandeln Sie Ideen in Sekundenschnelle in atemberaubende Realität.",
-  "about.story.title": "Unsere Geschichte",
-  "about.story.content":
-    "Megick entstand aus einer einfachen Idee: Jeder sollte die Möglichkeit haben, professionelle Visuals ohne steile Lernkurve zu erstellen. Wir haben eine KI Studio entwickelt, die fortschrittliche generative Modelle mit einem intuitiven Workflow kombiniert und dabei hilft, Ideen in Sekundenschnelle in ausgefeilte Bilder und Videos umzusetzen.",
-  "about.company.title": "MagickApi LLC",
-  "about.company.content":
-    "MagickApi LLC ist ein in Wyoming registriertes KI-Kreativtechnologieunternehmen in den Vereinigten Staaten. Mit Megick bieten wir zuverlässige Arbeitsabläufe zur Bild- und Videogenerierung für grenzüberschreitende Handelsteams, wachsende Unternehmen, Entwickler und professionelle Kreative. Unser Schwerpunkt liegt auf einer produktionsbereiten kreativen Infrastruktur: zuverlässiger Modellzugriff, klare Arbeitsabläufe, Ausgabeverarbeitung in kommerzieller Qualität und Tools, die Teams dabei helfen, sicher von Kampagnenideen zu nutzbaren visuellen Assets zu gelangen.",
-  "about.mission.title": "Unsere Mission",
-  "about.mission.content":
-    "Um die Lücke zwischen Fantasie und Kreativität zu schließen und Kreativen das zugänglichste und leistungsfähigste KI-Kreativ-Toolkit zur Verfügung zu stellen.",
-  "about.contact.title": "Kontaktieren Sie",
-  "about.contact.business": "Geschäftspartnerschaften",
-  "about.contact.support": "Beschwerden und Kundendienst",
-  "about.contact.feedback": "Fragen, Anregungen und Produkterfahrungen",
-  "about.why.title": "Warum sollten Sie sich für Megick",
-  "about.why.item1.title": "Blitzschnelle KI-Generation",
-  "about.why.item1.desc":
-    "Unsere optimierte Inferenzpipeline liefert HD Bilder in Sekunden und Videoclips in weniger als einer Minute – keine stundenlangen Wartezeiten mehr für kreative Iterationen.",
-  "about.why.item2.title": "Produktionsreife Qualität",
-  "about.why.item2.desc":
-    "Ausgabe mit einer Auflösung von bis zu 4K. Megick genießt das Vertrauen von Kreativteams, Content-Erstellern und Designstudios für den Produktionseinsatz.",
-  "about.why.item3.title": "Prompt-Entwurfsworkflow",
-  "about.why.item3.desc":
-    "Integrierte Prompt-Hilfen halten kreative Richtung in jeder Sprache klar und senken die Hürde für konsistente, hochwertige Generierungsergebnisse.",
-  "about.why.item4.title": "Multi-Plattform-Workflow",
-  "about.why.item4.desc":
-    "Web- und Desktop-Workflows helfen Teams, jederzeit und überall zu erstellen. Die Medienbibliothek hält generierte Assets übersichtlich.",
-  "about.team.title": "Unser Team",
-  "about.team.content":
-    "Megick wird von einem verteilten Team aus KI-Forschern, Software-Ingenieuren und Kreativprofis über mehrere Zeitzonen hinweg entwickelt. Wir glauben an die Demokratisierung kreativer KI und machen die Erstellung professioneller Bilder und Videos für jeden zugänglich, unabhängig vom technischen Hintergrund. Unser Team vereint Fachwissen in den Bereichen Verbreitungsmodelle, Videogenerierung und Cloud-Infrastruktur, um ein zuverlässiges, schnelles und angenehmes kreatives Erlebnis zu bieten.",
+
   "privacy.title": "Datenschutzrichtlinie",
   "privacy.lastUpdated": "Letzte Aktualisierung: 29. April 2026",
   "privacy.intro":
@@ -1539,7 +1504,7 @@ export const deMessages = {
     "Durch die Nutzung von Megick stimmen Sie diesen Nutzungsbedingungen zu. Bitte lesen Sie sie sorgfältig durch. Megick ist ein globaler KI-Kreativdienst, und Sie sollten die geltenden Gesetze, Vorschriften und Plattformregeln einhalten, die auf Ihrem Standort und dem Kontext Ihrer Inhaltsnutzung basieren.",
   "terms.section1.title": "1. Ihre Zustimmung zu diesen Bedingungen",
   "terms.section1.content":
-    "Diese Bedingungen stellen eine rechtsverbindliche Vereinbarung zwischen Ihnen und MagickApi LLC dar. Durch den Zugriff auf oder die Nutzung der Dienste erklären Sie sich mit diesen Bedingungen einverstanden. Wenn Sie damit nicht einverstanden sind, müssen Sie die Nutzung der Dienste sofort einstellen. Ihre Nutzung unterliegt außerdem unserer Datenschutzrichtlinie und allen zusätzlichen Richtlinien, die auf der Plattform veröffentlicht werden.",
+    "Diese Bedingungen stellen eine rechtsverbindliche Vereinbarung zwischen Ihnen und Megick dar. Durch den Zugriff auf oder die Nutzung der Dienste erklären Sie sich mit diesen Bedingungen einverstanden. Wenn Sie damit nicht einverstanden sind, müssen Sie die Nutzung der Dienste sofort einstellen. Ihre Nutzung unterliegt außerdem unserer Datenschutzrichtlinie und allen zusätzlichen Richtlinien, die auf der Plattform veröffentlicht werden.",
   "terms.section1.items":
     "Sie müssen alle Bedingungen akzeptieren, bevor Sie die Dienste nutzen.;Die Datenschutzrichtlinie und andere Richtlinien werden durch Bezugnahme einbezogen.;Wir können diese Bedingungen aktualisieren, um Änderungen in den Praktiken, rechtlichen Anforderungen oder Geschäftsabläufen widerzuspiegeln.;Wesentliche Änderungen werden über die Plattform oder per E-Mail mitgeteilt. Die weitere Nutzung nach Änderungen gilt als Annahme.",
   "terms.section2.title": "2. Konto und Registrierung",
@@ -1581,7 +1546,7 @@ export const deMessages = {
   "terms.section9.items": "",
   "terms.section10.title": "10. Schadensersatz",
   "terms.section10.content":
-    "Sie erklären sich damit einverstanden, MagickApi LLC, unsere Muttergesellschaften, Tochtergesellschaften, verbundenen Unternehmen, Lizenzgeber und Drittpartner sowie ihre jeweiligen leitenden Angestellten, Direktoren, Mitarbeiter und Vertreter von allen Ansprüchen, Schäden, Verlusten, Verbindlichkeiten, Kosten und Ausgaben zu verteidigen, zu entschädigen und schadlos zu halten, die sich aus Ihrer Nutzung der Dienste oder Ihrem Verstoß gegen diese Bedingungen ergeben.",
+    "Sie erklären sich damit einverstanden, Megick, unsere Muttergesellschaften, Tochtergesellschaften, verbundenen Unternehmen, Lizenzgeber und Drittpartner sowie ihre jeweiligen leitenden Angestellten, Direktoren, Mitarbeiter und Vertreter von allen Ansprüchen, Schäden, Verlusten, Verbindlichkeiten, Kosten und Ausgaben zu verteidigen, zu entschädigen und schadlos zu halten, die sich aus Ihrer Nutzung der Dienste oder Ihrem Verstoß gegen diese Bedingungen ergeben.",
   "terms.section10.items": "",
   "terms.section11.title": "11. Streitbeilegung und anwendbares Recht",
   "terms.section11.content":

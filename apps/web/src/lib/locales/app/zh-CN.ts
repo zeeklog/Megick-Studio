@@ -77,7 +77,6 @@ export const zhCNMessages = {
   "nav.getStarted": "开始使用",
   "nav.toggleMenu": "切换菜单",
   "nav.templates": "模板中心",
-  "nav.about": "关于",
   "nav.aiStudio": "AI 工作室",
   "nav.socialLink": "社交链接",
 
@@ -86,10 +85,8 @@ export const zhCNMessages = {
   "footer.company": "公司",
   "footer.iosApp": "iOS 应用",
   "footer.gallery": "图库",
-  "footer.about": "关于",
   "footer.privacy": "隐私",
   "footer.terms": "条款",
-  "footer.companyLegal": "MagickApi LLC",
   "footer.rights": "保留所有权利。",
   "footer.crafted": "用Megick.com魔法精心打造",
 
@@ -100,7 +97,6 @@ export const zhCNMessages = {
   "home.glaze.brand": "Megick Studio",
   "home.glaze.nav.projects": "模板",
   "home.glaze.nav.studio": "工作室",
-  "home.glaze.nav.about": "关于",
   "home.glaze.availability": "正在承接 2026 创意项目",
   "home.glaze.timeSuffix": "上海",
   "home.glaze.timeCity": "上海",
@@ -1373,38 +1369,6 @@ export const zhCNMessages = {
   "job.openOriginal": "打开原图",
   "job.notAvailable": "输出暂不可用。",
 
-  "about.title": "关于 Megick",
-  "about.description": "30秒，让你的创意变成现实",
-  "about.story.title": "我们的故事",
-  "about.story.content":
-    "Megick 诞生于一个简单的想法：每个人都应该拥有创作专业级视觉作品的能力，而不必经历陡峭的学习曲线。我们构建了一个结合先进生成模型和直观工作流的 AI Studio，让想法在几秒钟内变成精致的图像与视频。",
-  "about.company.title": "MagickApi LLC",
-  "about.company.content":
-    "MagickApi LLC 是一家注册于美国怀俄明州的 AI 创意科技公司。我们通过 Megick 为创意团队、企业、开发团队与专业创作者提供可靠的图像和视频生成工作流。Megick 专注于可投入生产使用的创意基础设施：稳定的模型能力、清晰的创作流程、高质量的素材处理，以及帮助团队从创意想法快速落地为可用视觉资产的专业工具。",
-  "about.mission.title": "我们的使命",
-  "about.mission.content": "连接想象与创作，为创作者提供易用且强大的 AI 创意工具包。",
-  "about.contact.title": "联系我们",
-  "about.contact.business": "商务合作",
-  "about.contact.support": "投诉售后",
-  "about.contact.feedback": "问题建议/使用体验",
-
-  "about.why.title": "为什么选择 Megick",
-  "about.why.item1.title": "极速 AI 生成",
-  "about.why.item1.desc":
-    "优化的推理引擎秒级出图，视频片段不到一分钟即可生成——无需为创意迭代等待数小时。",
-  "about.why.item2.title": "生产级品质",
-  "about.why.item2.desc":
-    "最高 4K 分辨率输出，默认包含商用许可。Megick 已获得创意团队、内容创作者和设计工作室的生产级信赖。",
-  "about.why.item3.title": "提示词草稿工作流",
-  "about.why.item3.desc":
-    "内置提示词助手帮助你用不同语言保持清晰创意方向，降低获得稳定高质量生成结果的门槛。",
-  "about.why.item4.title": "跨平台工作流",
-  "about.why.item4.desc":
-    "Web 与桌面端工作流支持随时随地创作，素材库帮助团队管理、复用和审阅生成内容。",
-
-  "about.team.title": "我们的团队",
-  "about.team.content":
-    "Megick 由一支跨时区分布的 AI 研究员、软件工程师和创意专业人士团队打造。我们相信民主化创意 AI——让专业级图像和视频生成对所有技术背景的用户都触手可及。我们的团队结合了在扩散模型、视频生成和云基础设施方面的专业能力，致力于提供可靠、快速、愉悦的创意体验。",
 
   "privacy.title": "隐私政策",
   "privacy.lastUpdated": "最后更新：2026年4月29日",
@@ -1453,7 +1417,7 @@ export const zhCNMessages = {
     "使用 Megick 即表示您同意本服务条款。请仔细阅读。Megick 是全球化 AI 创意服务，您应根据所在地及内容适用场景，遵守相应的法律法规、监管要求和平台规则。",
   "terms.section1.title": "1. 条款的接受",
   "terms.section1.content":
-    "本条款构成您与 MagickApi LLC 之间具有法律约束力的协议。访问或使用服务即表示您同意受本条款约束。如果您不同意，应立即停止使用服务。您的使用还受我们的隐私政策及平台上发布的任何额外指南的约束。",
+    "本条款构成您与 Megick 之间具有法律约束力的协议。访问或使用服务即表示您同意受本条款约束。如果您不同意，应立即停止使用服务。您的使用还受我们的隐私政策及平台上发布的任何额外指南的约束。",
   "terms.section1.items":
     "使用服务前必须接受所有条款和条件。；隐私政策和其他指南通过引用并入本协议。；我们可能更新本条款以反映实践、法律要求或业务运营的变化。；重大变更将通过平台通知或邮件告知。变更后继续使用即构成接受。",
   "terms.section2.title": "2. 账户与注册",
@@ -1494,7 +1458,7 @@ export const zhCNMessages = {
   "terms.section9.items": "",
   "terms.section10.title": "10. 赔偿",
   "terms.section10.content":
-    "您同意为 MagickApi LLC 及其母公司、子公司、关联公司、许可方和第三方合作伙伴及其各自的管理人员、董事、员工和代理人进行辩护、赔偿并使其免受因您使用服务或违反本条款而产生的任何索赔、损害、损失、责任、成本和费用。",
+    "您同意为 Megick 及其母公司、子公司、关联公司、许可方和第三方合作伙伴及其各自的管理人员、董事、员工和代理人进行辩护、赔偿并使其免受因您使用服务或违反本条款而产生的任何索赔、损害、损失、责任、成本和费用。",
   "terms.section10.items": "",
   "terms.section11.title": "11. 争议解决与管辖法律",
   "terms.section11.content":

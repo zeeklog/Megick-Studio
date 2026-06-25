@@ -52,21 +52,6 @@ const defaultHeaderItems: PublicMenuItem[] = [
     sortOrder: 30,
     metadata: { dashboardDefault: true },
   },
-  {
-    id: "default-header-about",
-    area: NavigationMenuArea.HEADER,
-    code: "about",
-    label: "About",
-    labelEn: "About",
-    description: null,
-    descriptionEn: null,
-    href: "/about",
-    icon: null,
-    requiresAuth: false,
-    isActive: true,
-    sortOrder: 60,
-    metadata: null,
-  },
 ];
 
 const defaultDashboardItems: PublicMenuItem[] = [
@@ -102,6 +87,13 @@ const defaultItemsByArea: Record<NavigationMenuArea, PublicMenuItem[]> = {
   [NavigationMenuArea.DASHBOARD_SIDEBAR]: defaultDashboardItems,
 };
 
+function isRemovedAboutMenuItem(item: Pick<PublicMenuItem, "area" | "code" | "href">) {
+  return (
+    item.area === NavigationMenuArea.HEADER &&
+    (item.code === "about" || item.href === "/about")
+  );
+}
+
 @Injectable()
 export class NavigationMenusService {
   constructor(private readonly prisma: PrismaService) {}
@@ -115,13 +107,15 @@ export class NavigationMenusService {
       where: { area, isActive: true },
       orderBy: [{ sortOrder: "asc" }, { createdAt: "asc" }],
     });
-    return rows.length ? rows : defaultItemsByArea[area];
+    const visibleRows = rows.filter((item) => !isRemovedAboutMenuItem(item));
+    return visibleRows.length ? visibleRows : defaultItemsByArea[area];
   }
 
-  listAdmin() {
-    return this.prisma.navigationMenuItem.findMany({
+  async listAdmin() {
+    const rows = await this.prisma.navigationMenuItem.findMany({
       orderBy: [{ area: "asc" }, { sortOrder: "asc" }, { createdAt: "asc" }],
     });
+    return rows.filter((item) => !isRemovedAboutMenuItem(item));
   }
 
   async upsert(input: NavigationMenuItemDto) {

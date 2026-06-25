@@ -4,8 +4,6 @@
   <img src="./logo.png" alt="Megick Studio" width="120" />
 </p>
 
-[ecommerce-suite-generate](./examples/ecommerce-suite-generate.gif)
-[video-gen-example](./examples/video-gen-example.gif)
 
 <p align="center">
   <strong>支持100+模型的开源 AI 图像与视频创作平台</strong>
@@ -22,6 +20,9 @@
 </p>
 
 Megick Studio 将 AI 图像生成、AI 视频生成、媒体资产管理、模板运营、模型供应商配置和后台管理整合在一个可自托管的工作台中。开源版聚焦创作链路、模型接入、素材管理和运维后台，适合团队搭建私有化 AIGC 生产环境或作为二次开发基础。
+
+[ecommerce-suite-generate](./examples/ecommerce-suite-generate.gif)
+[video-gen-example](./examples/video-gen-example.gif)
 
 ## 视频案例
 

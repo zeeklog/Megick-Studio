@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+
+Disallow: /admin
+Disallow: /dashboard
+Disallow: /editor
+Disallow: /api
+Disallow: /login
+Disallow: /signup
+
+Sitemap: https://megick.com/sitemap.xml

@@ -1,0 +1,23 @@
+{
+  "name": "@megick/api-types",
+  "version": "0.1.0",
+  "private": true,
+  "description": "TypeScript types generated from the @megick/api OpenAPI spec",
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "import": "./src/index.ts"
+    }
+  },
+  "scripts": {
+    "build": "echo 'pure types - nothing to compile'",
+    "regenerate": "pnpm --filter @megick/api openapi:emit && openapi-typescript ../../apps/api/dist/openapi.json -o ./src/generated/openapi.d.ts"
+  },
+  "devDependencies": {
+    "openapi-typescript": "^7.4.4",
+    "typescript": "^5.8.3"
+  }
+}

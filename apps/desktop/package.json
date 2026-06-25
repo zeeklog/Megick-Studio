@@ -1,0 +1,22 @@
+{
+  "name": "@megick/desktop",
+  "version": "1.0.2",
+  "private": true,
+  "description": "Megick Studio Desktop — Electron shell bundling the web frontend",
+  "main": "dist/main.js",
+  "scripts": {
+    "dev": "NODE_ENV=development pnpm build && electron dist/main.js",
+    "build": "tsc -p tsconfig.json && node -e \"const fs=require('fs'); fs.mkdirSync('dist',{recursive:true}); fs.copyFileSync('src/loading.html','dist/loading.html'); fs.copyFileSync('src/update.html','dist/update.html'); fs.copyFileSync('../../logo.png','dist/logo.png')\"",
+    "dist:mac": "NODE_ENV=production electron-builder --mac",
+    "dist:win": "electron-builder --win --x64 --arm64",
+    "dist:all": "NODE_ENV=production electron-builder --mac --win"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "^22.16.5",
+    "electron": "^35.6.0",
+    "electron-builder": "^26.0.12",
+    "tsx": "^4.19.2",
+    "typescript": "^5.8.3"
+  }
+}

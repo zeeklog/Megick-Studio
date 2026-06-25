@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Megick Studio</title>
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    color-scheme: dark;
+    --titlebar-height: 40px;
+    --ink: rgba(255, 255, 255, 0.86);
+    --muted: rgba(255, 255, 255, 0.46);
+    --gold: #f7c873;
+    --ember: #d77b46;
+  }
+
+  html, body {
+    height: 100%;
+    overflow: hidden;
+    background: #110f0a;
+    font-family: ui-serif, "New York", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    display: flex;
+    align-items: stretch;
+    justify-content: stretch;
+  }
+
+  .boot-shell {
+    position: relative;
+    min-height: 100%;
+    width: 100%;
+    overflow: hidden;
+    background: #110f0a;
+  }
+
+  .drag-strip {
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: var(--titlebar-height);
+    -webkit-app-region: drag;
+    z-index: 10;
+  }
+
+  .scene {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    background: #110f0a;
+    transform: scale(1.018);
+    animation: cinematic-pan 6.5s ease-out forwards;
+  }
+
+  .scene-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+  }
+
+  .scene::before,
+  .scene::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  /* .scene::before {
+    background:
+      linear-gradient(90deg, rgba(17, 15, 10, 0.94) 0%, rgba(17, 15, 10, 0.62) 44%, rgba(17, 15, 10, 0.2) 100%),
+      linear-gradient(180deg, rgba(17, 15, 10, 0.12) 0%, rgba(17, 15, 10, 0.62) 100%);
+    z-index: 1;
+  } */
+
+  .scene::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 28% 48%, rgba(247, 200, 115, 0.18), transparent 28%),
+      radial-gradient(circle at 76% 28%, rgba(215, 123, 70, 0.12), transparent 30%),
+      linear-gradient(180deg, transparent 0%, rgba(17, 15, 10, 0.9) 100%);
+    mix-blend-mode: screen;
+    opacity: 0.86;
+    z-index: 2;
+  }
+
+  .grain {
+    position: absolute;
+    inset: 0;
+    opacity: 0.13;
+    pointer-events: none;
+    background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.42) 1px, transparent 0);
+    background-size: 3px 3px;
+    mask-image: linear-gradient(90deg, black 0%, transparent 78%);
+  }
+
+  .content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    min-height: 100%;
+    width: min(86vw, 560px);
+    flex-direction: column;
+    justify-content: center;
+    padding: max(40px, 7vh) clamp(30px, 6vw, 74px);
+  }
+
+  .mark {
+    display: inline-flex;
+    width: clamp(72px, 12vw, 104px);
+    height: clamp(72px, 12vw, 104px);
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(247, 200, 115, 0.28);
+    border-radius: 28px;
+    background: linear-gradient(145deg, rgba(255,255,255,0.10), rgba(255,255,255,0.015));
+    box-shadow:
+      0 32px 80px rgba(0, 0, 0, 0.38),
+      0 0 48px rgba(247, 200, 115, 0.13),
+      inset 0 1px 0 rgba(255,255,255,0.16);
+    color: var(--gold);
+  }
+
+  .mark-logo {
+    display: block;
+    width: 72%;
+    height: 72%;
+    object-fit: contain;
+  }
+
+  .eyebrow {
+    margin-top: 34px;
+    color: rgba(247, 200, 115, 0.58);
+    font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: clamp(10px, 1.6vw, 12px);
+    font-weight: 700;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+  }
+
+  h1 {
+    margin-top: 10px;
+    color: var(--ink);
+    font-size: clamp(34px, 6vw, 56px);
+    font-weight: 700;
+    letter-spacing: -0.05em;
+    line-height: 0.95;
+  }
+
+  .status {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 30px;
+    color: var(--muted);
+    font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: clamp(12px, 1.8vw, 14px);
+    font-weight: 500;
+    position: fixed;
+    bottom: 31%;
+    left: 3em;
+  }
+
+  .loader {
+    position: relative;
+    width: 32px;
+    height: 32px;
+    border-radius: 999px;
+    background: conic-gradient(from 0deg, transparent, rgba(247, 200, 115, 0.1), rgba(247, 200, 115, 0.95), transparent 76%);
+    animation: spin 920ms linear infinite;
+  }
+
+  .loader::after {
+    content: "";
+    position: absolute;
+    inset: 3px;
+    border-radius: inherit;
+    background: rgba(17, 15, 10, 0.94);
+  }
+
+  .rule {
+    width: min(300px, 58vw);
+    height: 1px;
+    margin-top: 34px;
+    background: linear-gradient(90deg, rgba(247, 200, 115, 0.72), rgba(247, 200, 115, 0));
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  @keyframes cinematic-pan {
+    0% { transform: scale(1.06) translate3d(14px, 8px, 0); filter: saturate(0.92) brightness(0.82); }
+    100% { transform: scale(1.018) translate3d(0, 0, 0); filter: saturate(1.04) brightness(1); }
+  }
+
+  @media (max-width: 760px) {
+    .scene::before {
+      background: linear-gradient(180deg, rgba(17, 15, 10, 0.8) 0%, rgba(17, 15, 10, 0.72) 58%, rgba(17, 15, 10, 0.94) 100%);
+    }
+    .content {
+      width: 100%;
+      align-items: center;
+      text-align: center;
+      padding-inline: 28px;
+    }
+    .rule { background: linear-gradient(90deg, rgba(247, 200, 115, 0), rgba(247, 200, 115, 0.72), rgba(247, 200, 115, 0)); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .scene, .loader { animation: none; }
+  }
+</style>
+</head>
+<body>
+  <main class="boot-shell" aria-label="Megick Studio loading screen">
+    <div class="drag-strip" aria-hidden="true"></div>
+    <div class="scene" aria-hidden="true">
+      <video class="scene-video" src="./boot-bg-video.mp4" autoplay muted loop playsinline></video>
+    </div>
+    <div class="grain" aria-hidden="true"></div>
+
+    <section class="content">
+      <!-- <div class="mark" aria-hidden="true">
+        <img class="mark-logo" src="./logo.png" alt="" />
+      </div>
+      <p class="eyebrow">Megick Studio</p>
+      <h1>30秒，将你的创意变成现实.</h1> -->
+      <div class="status" role="status" aria-live="polite">
+        <span class="loader" aria-hidden="true"></span>
+        <span data-i18n="loading">正在加载加密工作区…</span>
+      </div>
+      <div class="rule" aria-hidden="true"></div>
+    </section>
+  </main>
+  <script>
+    function normalizeLocale(value) {
+      const locale = String(value || "").toLowerCase().replace(/_/g, "-");
+      if (
+        locale === "zh-tw" ||
+        locale === "zh-hk" ||
+        locale === "zh-mo" ||
+        locale === "zh-hant" ||
+        locale.startsWith("zh-tw-") ||
+        locale.startsWith("zh-hk-") ||
+        locale.startsWith("zh-mo-") ||
+        locale.startsWith("zh-hant-")
+      ) return "zh-TW";
+      if (locale === "zh" || locale === "zh-cn" || locale === "zh-hans" || locale.startsWith("zh-hans-")) return "zh-CN";
+      if (locale.startsWith("ja")) return "ja";
+      if (locale.startsWith("fr")) return "fr";
+      if (locale.startsWith("de")) return "de";
+      return "en";
+    }
+    const locale = normalizeLocale(navigator.language);
+    const copy = {
+      "zh-CN": { loading: "正在加载加密工作区…" },
+      "zh-TW": { loading: "正在載入加密工作區…" },
+      en: { loading: "Loading encrypted workspace..." },
+      ja: { loading: "暗号化ワークスペースを読み込み中..." },
+      fr: { loading: "Chargement de l'espace de travail chiffré..." },
+      de: { loading: "Verschlüsselter Arbeitsbereich wird geladen..." },
+    };
+    document.documentElement.lang = locale;
+    document.querySelectorAll("[data-i18n]").forEach((node) => {
+      const key = node.getAttribute("data-i18n");
+      if (key && copy[locale][key]) node.textContent = copy[locale][key];
+    });
+  </script>
+</body>
+</html>

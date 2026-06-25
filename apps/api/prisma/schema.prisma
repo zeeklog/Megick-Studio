@@ -1,0 +1,719 @@
+// Prisma schema for Megick AI Creations
+// Database: MySQL 8
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+// =============== Enums ===============
+
+enum UserStatus {
+  ACTIVE
+  DISABLED
+  PENDING
+}
+
+enum OAuthProviderEnum {
+  GOOGLE
+  GITHUB
+  APPLE
+}
+
+enum GenerationJobStatusEnum {
+  queued
+  running
+  succeeded
+  failed
+  canceled
+}
+
+enum GenerationJobTypeEnum {
+  TEXT2IMAGE
+  IMAGE2VIDEO
+  IMAGE_EDIT
+}
+
+enum AIModelCategory {
+  TEXT
+  TEXT2IMAGE
+  IMAGE2VIDEO
+}
+
+enum MediaCenterKindEnum {
+  IMAGE
+  VIDEO
+  AUDIO
+  FILE
+}
+
+enum MediaCenterSourceEnum {
+  GENERATION
+  USER_UPLOAD
+  STUDIO_EDIT
+  STUDIO_MEDIA
+  IMPORT
+}
+
+enum MediaCenterStatusEnum {
+  UPLOADING
+  READY
+  PROCESSING
+  FAILED
+  DELETED
+  ARCHIVED
+}
+
+enum AIModelAccessLevel {
+  FREE
+  PAID
+}
+
+enum ModelProviderApiStyle {
+  OPENAI
+  CREX
+  VOLCENGINE
+}
+
+enum ShowcaseTypeEnum {
+  TEXT2IMAGE
+  IMAGE2VIDEO
+}
+
+enum PromptTemplateStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+enum AssetVisibility {
+  PUBLIC
+  PRIVATE
+}
+
+enum DesktopPlatform {
+  MAC
+  WIN
+}
+
+enum AdminAction {
+  CREATE
+  UPDATE
+  DELETE
+  EXEC
+}
+
+enum NavigationMenuArea {
+  HEADER
+  DASHBOARD_SIDEBAR
+}
+
+// =============== Core ===============
+
+model User {
+  id           String     @id @default(cuid())
+  email        String     @unique
+  passwordHash String?    @db.VarChar(255)
+  status       UserStatus @default(ACTIVE)
+  lastLoginAt  DateTime?
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  profile                      Profile?
+  oauthAccounts                OAuthAccount[]
+  userRoles                    UserRole[]
+  creditEntries                CreditLedger[]
+  generationJobs               GenerationJob[]
+  generationOutputMedia        GenerationOutputMedia[]
+  mediaCenterItems             MediaCenterItem[]
+  chatSessions                 ChatSession[]
+  ossAssets                    OssAsset[]
+  adminAuditLogs               AdminAuditLog[]
+  promptTemplates              PromptTemplate[]
+
+  @@map("users")
+}
+
+model Profile {
+  userId                     String                 @id
+  displayName                String                 @default("Creator")
+  avatarUrl                  String?                @db.VarChar(512)
+  locale                     String                 @default("en") @db.VarChar(16)
+  localeSource               String                 @default("device") @db.VarChar(16)
+  localeUpdatedAt            DateTime?
+  credits                    Int                    @default(0)
+  createdAt                  DateTime               @default(now())
+  updatedAt                  DateTime               @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("profiles")
+}
+
+model OAuthAccount {
+  id              String            @id @default(cuid())
+  userId          String
+  provider        OAuthProviderEnum
+  providerUserId  String            @db.VarChar(191)
+  email           String?           @db.VarChar(191)
+  displayName     String?           @db.VarChar(191)
+  avatarUrl       String?           @db.VarChar(512)
+  accessTokenEnc  String?           @db.Text
+  refreshTokenEnc String?           @db.Text
+  expiresAt       DateTime?
+  raw             Json?
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerUserId])
+  @@index([userId])
+  @@map("oauth_accounts")
+}
+
+// =============== RBAC ===============
+
+model Role {
+  id          String   @id @default(cuid())
+  code        String   @unique @db.VarChar(64)
+  name        String
+  description String?
+  isSystem    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  permissions RolePermission[]
+  users       UserRole[]
+
+  @@map("roles")
+}
+
+model Permission {
+  id          String   @id @default(cuid())
+  code        String   @unique @db.VarChar(128)
+  name        String
+  group       String?  @db.VarChar(64)
+  description String?
+  createdAt   DateTime @default(now())
+
+  roles RolePermission[]
+
+  @@map("permissions")
+}
+
+model RolePermission {
+  roleId       String
+  permissionId String
+  createdAt    DateTime @default(now())
+
+  role       Role       @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  permission Permission @relation(fields: [permissionId], references: [id], onDelete: Cascade)
+
+  @@id([roleId, permissionId])
+  @@map("role_permissions")
+}
+
+model UserRole {
+  userId    String
+  roleId    String
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  role Role @relation(fields: [roleId], references: [id], onDelete: Cascade)
+
+  @@id([userId, roleId])
+  @@map("user_roles")
+}
+
+model CreditLedger {
+  id           String   @id @default(cuid())
+  userId       String
+  delta        Int
+  balanceAfter Int
+  reason       String   @db.VarChar(191)
+  refType      String?  @db.VarChar(64)
+  refId        String?  @db.VarChar(191)
+  idempotencyKey String? @unique @db.VarChar(191)
+  metadata     Json?
+  createdAt    DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("credit_ledger")
+}
+
+// =============== AI Generation ===============
+
+model AIModel {
+  id                      String             @id @default(cuid())
+  code                    String             @unique @db.VarChar(64)
+  displayName             String
+  displayNameEn           String?            @db.VarChar(191)
+  category                AIModelCategory
+  accessLevel             AIModelAccessLevel @default(FREE)
+  providerId              String?
+  baseUrl                 String             @db.VarChar(512)
+  apiKeyEnc               String             @db.Text
+  modelName               String             @db.VarChar(128)
+  defaultParams           Json
+  costCredits             Int                @default(1)
+  rateLimitPerMinute      Int                @default(60)
+  isActive                Boolean            @default(true)
+  isDefault               Boolean            @default(false)
+  sortOrder               Int                @default(0)
+  description             String?
+  supportsReferenceImages Boolean            @default(false)
+  requiresReferenceImages Boolean            @default(false)
+  createdAt               DateTime           @default(now())
+  updatedAt               DateTime           @updatedAt
+
+  provider               ModelProviderConfig?    @relation(fields: [providerId], references: [id], onDelete: SetNull)
+  generationJobs         GenerationJob[]
+
+  @@index([providerId])
+  @@map("ai_models")
+}
+
+model GenerationJob {
+  id                        String                  @id @default(cuid())
+  userId                    String
+  modelId                   String
+  modelCode                 String                  @db.VarChar(64)
+  type                      GenerationJobTypeEnum
+  status                    GenerationJobStatusEnum @default(queued)
+  prompt                    String                  @db.Text
+  params                    Json
+  inputAssetKey             String?                 @db.VarChar(512)
+  outputAssetIds            Json
+  providerOutputUrls        Json?
+  progress                  Int                     @default(0)
+  costCredits               Int                     @default(0)
+  errorMessage              String?                 @db.Text
+  providerJobId             String?                 @db.VarChar(191)
+  providerIdSnapshot        String?                 @db.VarChar(191)
+  providerBaseUrlSnapshot   String?                 @db.VarChar(512)
+  providerApiStyleSnapshot  ModelProviderApiStyle?
+  providerStatusUrlSnapshot String?                 @db.VarChar(512)
+  providerModelNameSnapshot String?                 @db.VarChar(128)
+  providerParamsSnapshot    Json?
+  chatSessionId             String?
+  startedAt                 DateTime?
+  finishedAt                DateTime?
+  createdAt                 DateTime                @default(now())
+  updatedAt                 DateTime                @updatedAt
+
+  user               User                    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  model              AIModel                 @relation(fields: [modelId], references: [id])
+  chatSession        ChatSession?            @relation(fields: [chatSessionId], references: [id], onDelete: SetNull)
+  chatMessages       ChatMessage[]
+  promptTemplates    PromptTemplate[]
+  outputMedia        GenerationOutputMedia[]
+  mediaCenterItems   MediaCenterItem[]
+
+  @@index([userId])
+  @@index([userId, createdAt])
+  @@index([status])
+  @@index([chatSessionId])
+  @@index([providerIdSnapshot])
+  @@map("generation_jobs")
+}
+
+model ChatSession {
+  id        String   @id @default(cuid())
+  userId    String
+  title     String   @default("New chat") @db.VarChar(191)
+  pinned    Boolean  @default(false)
+  archived  Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user            User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  messages        ChatMessage[]
+  jobs            GenerationJob[]
+  promptTemplates PromptTemplate[]
+
+  @@index([userId])
+  @@map("chat_sessions")
+}
+
+model ChatMessage {
+  id              String   @id @default(cuid())
+  sessionId       String
+  role            String   @db.VarChar(16) // user | assistant | system
+  content         String   @db.Text
+  generationJobId String?
+  metadata        Json?
+  createdAt       DateTime @default(now())
+
+  session         ChatSession      @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  generationJob   GenerationJob?   @relation(fields: [generationJobId], references: [id], onDelete: SetNull)
+  promptTemplates PromptTemplate[]
+
+  @@index([sessionId])
+  @@index([generationJobId])
+  @@map("chat_messages")
+}
+
+model PromptTemplate {
+  id                    String                @id @default(cuid())
+  type                  GenerationJobTypeEnum
+  status                PromptTemplateStatus  @default(DRAFT)
+  title                 String                @db.VarChar(191)
+  description           String?               @db.Text
+  textPrompt            String                @db.Text
+  materialPrompt        String?               @db.Text
+  referenceAssetKeys    Json
+  exampleAssetKey       String?               @db.VarChar(512)
+  modelCode             String?               @db.VarChar(64)
+  params                Json
+  tags                  Json
+  categoryName          String?               @map("category") @db.VarChar(64)
+  sortOrder             Int                   @default(0)
+  isFeatured            Boolean               @default(false)
+  usageCount            Int                   @default(0)
+  sourceChatSessionId   String?
+  sourceGenerationJobId String?
+  sourceMessageId       String?
+  createdByAdminId      String?
+  publishedAt           DateTime?
+  createdAt             DateTime              @default(now())
+  updatedAt             DateTime              @updatedAt
+
+  sourceChatSession   ChatSession?                       @relation(fields: [sourceChatSessionId], references: [id], onDelete: SetNull)
+  sourceGenerationJob GenerationJob?                     @relation(fields: [sourceGenerationJobId], references: [id], onDelete: SetNull)
+  sourceMessage       ChatMessage?                       @relation(fields: [sourceMessageId], references: [id], onDelete: SetNull)
+  createdByAdmin      User?                              @relation(fields: [createdByAdminId], references: [id], onDelete: SetNull)
+  category            PromptTemplateCategory?            @relation(fields: [categoryName], references: [name], onDelete: SetNull, onUpdate: Cascade)
+  categoryAssignments PromptTemplateCategoryAssignment[]
+
+  @@index([type, status])
+  @@index([categoryName], map: "prompt_templates_category_idx")
+  @@index([sourceChatSessionId])
+  @@index([sourceGenerationJobId])
+  @@index([sourceMessageId])
+  @@index([createdByAdminId])
+  @@map("prompt_templates")
+}
+
+model PromptTemplateCategory {
+  id                  String                             @id @default(cuid())
+  name                String                             @unique @db.VarChar(64)
+  sortOrder           Int                                @default(0)
+  isActive            Boolean                            @default(true)
+  createdAt           DateTime                           @default(now())
+  updatedAt           DateTime                           @updatedAt
+  promptTemplates     PromptTemplate[]
+  templateAssignments PromptTemplateCategoryAssignment[]
+
+  @@map("prompt_template_categories")
+}
+
+model PromptTemplateCategoryAssignment {
+  templateId String
+  categoryId String
+  createdAt  DateTime @default(now())
+
+  template PromptTemplate         @relation(fields: [templateId], references: [id], onDelete: Cascade)
+  category PromptTemplateCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  @@id([templateId, categoryId])
+  @@index([categoryId])
+  @@map("prompt_template_category_assignments")
+}
+
+// =============== Configuration tables (admin-managed) ===============
+
+model ModelProviderConfig {
+  id                String                @id @default(cuid())
+  code              String                @unique @db.VarChar(64)
+  name              String                @db.VarChar(191)
+  baseUrl           String                @default("https://api.magickapi.com") @db.VarChar(512)
+  apiStyle          ModelProviderApiStyle @default(OPENAI)
+  statusUrl         String?               @db.VarChar(512)
+  maxPollDurationMs Int                   @default(900000)
+  pollIntervalMs    Int                   @default(5000)
+  maxPollAttempts   Int                   @default(180)
+  apiKeyEnc         String                @db.Text
+  extra             Json?
+  isActive          Boolean               @default(true)
+  sortOrder         Int                   @default(0)
+  createdAt         DateTime              @default(now())
+  updatedAt         DateTime              @updatedAt
+
+  aiModels       AIModel[]
+  imageEditModes AIImageEditMode[]
+
+  @@index([isActive, sortOrder])
+  @@map("model_provider_configs")
+}
+
+model AIImageEditMode {
+  id            String   @id @default(cuid())
+  code          String   @unique @db.VarChar(64)
+  name          String   @db.VarChar(191)
+  providerId    String?
+  modelName     String   @db.VarChar(128)
+  requiresMask  Boolean  @default(false)
+  defaultParams Json
+  costCredits   Int      @default(1)
+  isActive      Boolean  @default(true)
+  sortOrder     Int      @default(0)
+  description   String?  @db.Text
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  provider ModelProviderConfig? @relation(fields: [providerId], references: [id], onDelete: SetNull)
+
+  @@index([providerId])
+  @@index([isActive, sortOrder])
+  @@map("ai_image_edit_modes")
+}
+
+model OAuthProviderConfig {
+  id              String            @id @default(cuid())
+  provider        OAuthProviderEnum @unique
+  clientId        String            @db.VarChar(191)
+  clientSecretEnc String            @db.Text
+  redirectUri     String            @db.VarChar(512)
+  scopes          Json
+  extra           Json?
+  isActive        Boolean           @default(true)
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+
+  @@map("oauth_provider_configs")
+}
+
+model SmtpConfig {
+  id        String   @id @default(cuid())
+  name      String   @unique @default("default") @db.VarChar(64)
+  configEnc String   @db.Text
+  isActive  Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("smtp_configs")
+}
+
+model ShowcaseItem {
+  id             String           @id @default(cuid())
+  type           ShowcaseTypeEnum
+  title          String
+  prompt         String           @db.Text
+  beforeAssetKey String?          @db.VarChar(512)
+  afterAssetKey  String           @db.VarChar(512)
+  durationMs     Int?
+  source         String?          @db.VarChar(191)
+  sortOrder      Int              @default(0)
+  isActive       Boolean          @default(true)
+  metadata       Json?
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+
+  @@map("showcase_items")
+}
+
+model NavigationMenuItem {
+  id            String             @id @default(cuid())
+  area          NavigationMenuArea
+  code          String             @db.VarChar(64)
+  label         String             @db.VarChar(191)
+  labelEn       String?            @db.VarChar(191)
+  description   String?            @db.VarChar(255)
+  descriptionEn String?            @db.VarChar(255)
+  href          String             @db.VarChar(512)
+  icon          String?            @db.VarChar(64)
+  requiresAuth  Boolean            @default(false)
+  isActive      Boolean            @default(true)
+  sortOrder     Int                @default(0)
+  metadata      Json?
+  createdAt     DateTime           @default(now())
+  updatedAt     DateTime           @updatedAt
+
+  @@unique([area, code])
+  @@index([area, isActive, sortOrder])
+  @@map("navigation_menu_items")
+}
+
+model OssAsset {
+  id          String          @id @default(cuid())
+  userId      String?
+  bucket      String          @db.VarChar(128)
+  key         String          @unique @db.VarChar(512)
+  contentType String          @db.VarChar(128)
+  sizeBytes   Int             @default(0)
+  width       Int?
+  height      Int?
+  durationMs  Int?
+  sha256      String?         @db.VarChar(64)
+  visibility  AssetVisibility @default(PRIVATE)
+  metadata    Json?
+  createdAt   DateTime        @default(now())
+
+  user                  User?                   @relation(fields: [userId], references: [id], onDelete: SetNull)
+  generationOutputMedia GenerationOutputMedia[]
+  mediaCenterItems      MediaCenterItem[]
+
+  @@index([userId])
+  @@map("oss_assets")
+}
+
+model MediaCenterItem {
+  id                      String                @id @db.VarChar(64)
+  userId                  String
+  kind                    MediaCenterKindEnum
+  source                  MediaCenterSourceEnum
+  status                  MediaCenterStatusEnum @default(READY)
+  ossAssetId              String?               @unique
+  bucket                  String                @db.VarChar(128)
+  ossKey                  String                @db.VarChar(512)
+  originalOssUrl          String?               @db.Text
+  signedUrl               String?               @db.Text
+  signedUrlExpiresAt      DateTime?
+  watermarkedUrl          String?               @db.Text
+  watermarkedUrlExpiresAt DateTime?
+  watermarkProcess        String?               @db.VarChar(191)
+  requiresWatermark       Boolean               @default(false)
+  providerSourceUrl       String?               @db.Text
+  prompt                  String?               @db.Text
+  jobId                   String?
+  outputIndex             Int?
+  chatSessionId           String?
+  messageId               String?
+  contentType             String                @db.VarChar(128)
+  sizeBytes               Int                   @default(0)
+  width                   Int?
+  height                  Int?
+  durationMs              Int?
+  sha256                  String?               @db.VarChar(64)
+  visibility              AssetVisibility       @default(PRIVATE)
+  metadata                Json?
+  sourceParams            Json?
+  createdAt               DateTime              @default(now())
+  updatedAt               DateTime              @updatedAt
+
+  user     User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  ossAsset OssAsset?      @relation(fields: [ossAssetId], references: [id], onDelete: SetNull)
+  job      GenerationJob? @relation(fields: [jobId], references: [id], onDelete: SetNull)
+
+  @@unique([jobId, outputIndex])
+  @@index([userId, kind, status, createdAt])
+  @@index([userId, source, createdAt])
+  @@index([ossKey])
+  @@index([chatSessionId])
+  @@index([messageId])
+  @@map("media_center_items")
+}
+
+model GenerationOutputMedia {
+  id          String   @id @db.VarChar(64)
+  userId      String
+  jobId       String
+  outputIndex Int
+  assetId     String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user  User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  job   GenerationJob @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  asset OssAsset      @relation(fields: [assetId], references: [id], onDelete: Cascade)
+
+  @@unique([jobId, outputIndex])
+  @@index([userId])
+  @@index([assetId])
+  @@map("generation_output_media")
+}
+
+model SiteSetting {
+  key       String   @id @db.VarChar(128)
+  value     Json
+  scope     String?  @db.VarChar(64)
+  updatedAt DateTime @updatedAt
+
+  @@map("site_settings")
+}
+
+model CloudR2Config {
+  id                    String   @id @default(cuid())
+  name                  String   @unique @default("default") @db.VarChar(64)
+  accountId             String?  @db.VarChar(128)
+  endpoint              String   @db.VarChar(512)
+  bucket                String   @db.VarChar(128)
+  accessKeyId           String   @db.VarChar(191)
+  secretAccessKeyEnc    String   @db.Text
+  publicBaseUrl         String?  @db.VarChar(512)
+  publicDevelopmentUrl  String?  @db.VarChar(512)
+  keyPrefix             String   @default("desktop-installers") @db.VarChar(191)
+  presignExpiresSeconds Int      @default(3600)
+  isActive              Boolean  @default(true)
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+
+  @@map("cloud_r2_configs")
+}
+
+model OssConfig {
+  id                 String   @id @default(cuid())
+  name               String   @unique @default("default") @db.VarChar(64)
+  region             String   @db.VarChar(128)
+  endpoint           String?  @db.VarChar(512)
+  bucket             String   @db.VarChar(128)
+  accessKeyId        String   @db.VarChar(191)
+  accessKeySecretEnc String   @db.Text
+  domain             String?  @db.VarChar(512)
+  publicBaseUrl      String?  @db.VarChar(512)
+  isActive           Boolean  @default(true)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  @@map("oss_configs")
+}
+
+model DesktopRelease {
+  id            String          @id @default(cuid())
+  platform      DesktopPlatform
+  version       String          @db.VarChar(64)
+  downloadUrl   String          @db.VarChar(1024)
+  r2ObjectKey   String?         @db.VarChar(512)
+  fileName      String?         @db.VarChar(255)
+  fileSizeBytes BigInt?
+  sha256        String?         @db.VarChar(64)
+  sha512        String?         @db.VarChar(128)
+  releaseNotes  String?         @db.Text
+  isLatest      Boolean         @default(false)
+  forceUpdate   Boolean         @default(true)
+  isActive      Boolean         @default(true)
+  publishedAt   DateTime?
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+
+  @@unique([platform, version])
+  @@index([platform, isLatest])
+  @@index([platform, isActive, createdAt])
+  @@map("desktop_releases")
+}
+
+model AdminAuditLog {
+  id         String      @id @default(cuid())
+  adminId    String?
+  action     AdminAction
+  targetType String      @db.VarChar(64)
+  targetId   String?     @db.VarChar(128)
+  before     Json?
+  after      Json?
+  ip         String?     @db.VarChar(64)
+  userAgent  String?     @db.VarChar(512)
+  createdAt  DateTime    @default(now())
+
+  admin User? @relation(fields: [adminId], references: [id], onDelete: SetNull)
+
+  @@index([adminId])
+  @@index([targetType])
+  @@map("admin_audit_logs")
+}

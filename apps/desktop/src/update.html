@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Megick Studio Update</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; background: #110f0a; color: rgba(255,255,255,.88); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+  body { display: grid; place-items: center; padding: 32px; }
+  .card { width: min(520px, 100%); border: 1px solid rgba(255,255,255,.1); border-radius: 24px; background: linear-gradient(145deg, rgba(255,255,255,.08), rgba(255,255,255,.025)); padding: 30px; box-shadow: 0 28px 90px rgba(0,0,0,.42); }
+  .eyebrow { color: #f7c873; font-size: 12px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; }
+  h1 { margin: 12px 0 10px; font-size: 28px; letter-spacing: -.04em; }
+  p { margin: 0; color: rgba(255,255,255,.56); line-height: 1.7; }
+  .versions { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 24px 0; }
+  .version { border: 1px solid rgba(255,255,255,.08); border-radius: 16px; padding: 14px; background: rgba(255,255,255,.04); }
+  .label { color: rgba(255,255,255,.36); font-size: 12px; }
+  .value { margin-top: 6px; font-size: 18px; font-weight: 700; }
+  .bar { height: 10px; overflow: hidden; border-radius: 999px; background: rgba(255,255,255,.08); }
+  .fill { width: 0%; height: 100%; border-radius: inherit; background: linear-gradient(90deg, #f7c873, #d77b46); transition: width .2s ease; }
+  .status { margin-top: 14px; font-size: 13px; color: rgba(255,255,255,.68); }
+  .notes { margin-top: 18px; white-space: pre-wrap; font-size: 13px; color: rgba(255,255,255,.52); }
+  button { margin-top: 18px; display: none; border: 1px solid rgba(247,200,115,.45); border-radius: 12px; background: rgba(247,200,115,.12); color: #f7c873; padding: 10px 14px; cursor: pointer; }
+</style>
+</head>
+<body>
+  <main class="card">
+    <div class="eyebrow">Megick Studio Update</div>
+    <h1 data-i18n="title">发现新版本，正在强制升级</h1>
+    <p data-i18n="description">为了确保桌面客户端兼容最新服务，升级完成前暂时无法继续使用。</p>
+    <div class="versions">
+      <div class="version"><div class="label" data-i18n="currentVersion">当前版本</div><div id="current" class="value">-</div></div>
+      <div class="version"><div class="label" data-i18n="latestVersion">最新版本</div><div id="latest" class="value">-</div></div>
+    </div>
+    <div class="bar"><div id="fill" class="fill"></div></div>
+    <div id="status" class="status" data-i18n="checking">准备检查更新…</div>
+    <div id="notes" class="notes"></div>
+    <button id="retry" type="button" data-i18n="retry">重试下载</button>
+  </main>
+  <script>
+    const copy = {
+      'zh-CN': {
+        title: '发现新版本，正在强制升级',
+        description: '为了确保桌面客户端兼容最新服务，升级完成前暂时无法继续使用。',
+        currentVersion: '当前版本',
+        latestVersion: '最新版本',
+        checking: '准备检查更新…',
+        retry: '重试下载',
+        downloading: (percent) => `下载中 ${Math.round(percent || 0)}%`,
+      },
+      'zh-TW': {
+        title: '發現新版本，正在強制升級',
+        description: '為了確保桌面客戶端相容最新服務，升級完成前暫時無法繼續使用。',
+        currentVersion: '目前版本',
+        latestVersion: '最新版本',
+        checking: '準備檢查更新…',
+        retry: '重試下載',
+        downloading: (percent) => `下載中 ${Math.round(percent || 0)}%`,
+      },
+      en: {
+        title: 'New version available',
+        description: 'To keep the desktop client compatible with the latest service, you need to update before continuing.',
+        currentVersion: 'Current version',
+        latestVersion: 'Latest version',
+        checking: 'Preparing to check for updates...',
+        retry: 'Retry download',
+        downloading: (percent) => `Downloading ${Math.round(percent || 0)}%`,
+      },
+      ja: {
+        title: '新しいバージョンがあります',
+        description: 'デスクトップクライアントを最新サービスと互換に保つため、続行前に更新が必要です。',
+        currentVersion: '現在のバージョン',
+        latestVersion: '最新バージョン',
+        checking: '更新を確認する準備中...',
+        retry: 'ダウンロードを再試行',
+        downloading: (percent) => `ダウンロード中 ${Math.round(percent || 0)}%`,
+      },
+      fr: {
+        title: 'Nouvelle version disponible',
+        description: 'Pour garder le client desktop compatible avec le dernier service, vous devez le mettre à jour avant de continuer.',
+        currentVersion: 'Version actuelle',
+        latestVersion: 'Dernière version',
+        checking: 'Préparation de la vérification des mises à jour...',
+        retry: 'Réessayer le téléchargement',
+        downloading: (percent) => `Téléchargement ${Math.round(percent || 0)}%`,
+      },
+      de: {
+        title: 'Neue Version verfügbar',
+        description: 'Damit der Desktop-Client mit dem neuesten Dienst kompatibel bleibt, müssen Sie vor dem Fortfahren aktualisieren.',
+        currentVersion: 'Aktuelle Version',
+        latestVersion: 'Neueste Version',
+        checking: 'Update-Prüfung wird vorbereitet...',
+        retry: 'Download erneut versuchen',
+        downloading: (percent) => `Download ${Math.round(percent || 0)}%`,
+      },
+    };
+    function normalizeLocale(value) {
+      const locale = String(value || '').toLowerCase().replace(/_/g, '-');
+      if (
+        locale === 'zh-tw' ||
+        locale === 'zh-hk' ||
+        locale === 'zh-mo' ||
+        locale === 'zh-hant' ||
+        locale.startsWith('zh-tw-') ||
+        locale.startsWith('zh-hk-') ||
+        locale.startsWith('zh-mo-') ||
+        locale.startsWith('zh-hant-')
+      ) return 'zh-TW';
+      if (locale === 'zh' || locale === 'zh-cn' || locale === 'zh-hans' || locale.startsWith('zh-hans-')) return 'zh-CN';
+      if (locale.startsWith('ja')) return 'ja';
+      if (locale.startsWith('fr')) return 'fr';
+      if (locale.startsWith('de')) return 'de';
+      return 'en';
+    }
+    const locale = normalizeLocale(navigator.language);
+    const text = copy[locale];
+    document.documentElement.lang = locale;
+    document.querySelectorAll('[data-i18n]').forEach((node) => {
+      const key = node.getAttribute('data-i18n');
+      if (key && typeof text[key] === 'string') node.textContent = text[key];
+    });
+
+    const current = document.getElementById('current');
+    const latest = document.getElementById('latest');
+    const fill = document.getElementById('fill');
+    const status = document.getElementById('status');
+    const notes = document.getElementById('notes');
+    const retry = document.getElementById('retry');
+
+    window.megickUpdater?.onInfo((info) => {
+      current.textContent = info.currentVersion || '-';
+      latest.textContent = info.latestVersion || '-';
+      notes.textContent = info.releaseNotes || '';
+    });
+    window.megickUpdater?.onProgress((progress) => {
+      fill.style.width = `${Math.max(0, Math.min(100, progress.percent || 0))}%`;
+      status.textContent = progress.status || text.downloading(progress.percent);
+    });
+    window.megickUpdater?.onStatus((message) => {
+      status.textContent = message;
+    });
+    window.megickUpdater?.onError((message) => {
+      status.textContent = message;
+      retry.style.display = 'inline-flex';
+    });
+    retry.addEventListener('click', () => {
+      retry.style.display = 'none';
+      window.megickUpdater?.retry();
+    });
+  </script>
+</body>
+</html>

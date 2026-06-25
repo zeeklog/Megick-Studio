@@ -1,0 +1,56 @@
+appId: com.megick.studio
+productName: Megick Studio
+copyright: Copyright © 2026 Megick
+
+directories:
+  output: dist-release
+  buildResources: build
+
+files:
+  # Include compiled main process
+  - dist/main.js
+  - dist/preload.js
+  - dist/loading.html
+  - dist/update.html
+  - dist/logo.png
+  - dist/boot-bg-video.mp4
+
+mac:
+  category: public.app-category.photography
+  icon: build/icon.icns
+  target:
+    - dmg
+    - zip
+  hardenedRuntime: true
+  gatekeeperAssess: false
+  entitlements: build/entitlements.mac.plist
+  entitlementsInherit: build/entitlements.mac.plist
+  notarize: true
+
+dmg:
+  title: Megick Studio
+  icon: build/icon.icns
+  contents:
+    - x: 130
+      y: 220
+    - x: 410
+      y: 220
+      type: link
+      path: /Applications
+
+win:
+  icon: build/icon.ico
+  target:
+    - nsis
+
+nsis:
+  oneClick: false
+  allowToChangeInstallationDirectory: true
+  installerIcon: build/icon.ico
+  uninstallerIcon: build/icon.ico
+
+linux:
+  icon: build/icons
+  target:
+    - AppImage
+    - deb

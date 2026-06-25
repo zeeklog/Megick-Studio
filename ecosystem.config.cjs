@@ -1,0 +1,40 @@
+module.exports = {
+  apps: [
+    {
+      name: "megick-api",
+      cwd: "./apps/api",
+      script: "dist/main.js",
+      exec_mode: "cluster",
+      instances: Number(process.env.MEGICK_API_INSTANCES || 2),
+      autorestart: true,
+      watch: false,
+      max_memory_restart: "2G",
+      kill_timeout: 10000,
+      listen_timeout: 10000,
+      env: {
+        APP_ENV: "production",
+        NODE_ENV: "production",
+        PORT: 3333,
+        WEB_DIST_DIR: "../web/dist",
+        MEGICK_RUN_WORKERS: "false",
+      },
+    },
+    {
+      name: "megick-worker",
+      cwd: "./apps/api",
+      script: "dist/worker.js",
+      exec_mode: "fork",
+      instances: Number(process.env.MEGICK_WORKER_INSTANCES || 5),
+      autorestart: true,
+      watch: false,
+      max_memory_restart: "2G",
+      kill_timeout: 30000,
+      env: {
+        APP_ENV: "production",
+        NODE_ENV: "production",
+        SERVE_WEB: "false",
+        MEGICK_RUN_WORKERS: "true",
+      },
+    },
+  ],
+};

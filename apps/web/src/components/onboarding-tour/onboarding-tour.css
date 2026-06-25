@@ -1,0 +1,109 @@
+.driver-popover.megick-onboarding-popover {
+  z-index: 2147483000;
+  box-sizing: border-box;
+  min-width: min(300px, calc(100vw - 32px));
+  max-width: min(360px, calc(100vw - 32px));
+  padding: 16px;
+  border: 1px solid var(--border, rgba(15, 23, 42, 0.12));
+  border-radius: 14px;
+  background-color: var(--popover, #ffffff);
+  color: var(--popover-foreground, #18181b);
+  box-shadow:
+    0 24px 80px rgba(0, 0, 0, 0.28),
+    0 0 0 1px color-mix(in oklab, var(--primary, #7c3aed) 12%, transparent);
+  backdrop-filter: blur(18px);
+}
+
+.driver-popover.megick-onboarding-popover .driver-popover-title {
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: 0;
+}
+
+.driver-popover.megick-onboarding-popover .driver-popover-description {
+  margin-top: 6px;
+  color: var(--muted-foreground, #71717a);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.driver-popover.megick-onboarding-popover .driver-popover-progress-text {
+  color: var(--muted-foreground, #71717a);
+  font-size: 11px;
+}
+
+.driver-popover.megick-onboarding-popover .driver-popover-footer {
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.driver-popover.megick-onboarding-popover .driver-popover-navigation-btns {
+  gap: 8px;
+}
+
+.driver-popover.megick-onboarding-popover button {
+  border-radius: 999px;
+  border: 1px solid var(--border, rgba(15, 23, 42, 0.12));
+  background-color: var(--background, #ffffff);
+  color: var(--foreground, #18181b);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
+  padding: 8px 12px;
+  text-shadow: none;
+}
+
+.driver-popover.megick-onboarding-popover button:hover {
+  background-color: var(--secondary, #f4f4f5);
+}
+
+.driver-popover.megick-onboarding-popover .driver-popover-next-btn {
+  border-color: transparent;
+  background-color: var(--primary, #7c3aed);
+  color: var(--primary-foreground, #ffffff);
+}
+
+.driver-popover.megick-onboarding-popover .driver-popover-next-btn:hover {
+  background-color: color-mix(in oklab, var(--primary, #7c3aed) 88%, black);
+}
+
+.driver-popover.megick-onboarding-popover .driver-popover-close-btn {
+  color: var(--muted-foreground, #71717a);
+  font-size: 18px;
+  padding: 4px;
+}
+
+.driver-popover.megick-onboarding-popover .driver-popover-arrow-side-left {
+  border-top-color: transparent;
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+  border-left-color: var(--popover, #ffffff);
+}
+
+.driver-popover.megick-onboarding-popover .driver-popover-arrow-side-right {
+  border-top-color: transparent;
+  border-right-color: var(--popover, #ffffff);
+  border-bottom-color: transparent;
+  border-left-color: transparent;
+}
+
+.driver-popover.megick-onboarding-popover .driver-popover-arrow-side-top {
+  border-top-color: var(--popover, #ffffff);
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+  border-left-color: transparent;
+}
+
+.driver-popover.megick-onboarding-popover .driver-popover-arrow-side-bottom {
+  border-top-color: transparent;
+  border-right-color: transparent;
+  border-bottom-color: var(--popover, #ffffff);
+  border-left-color: transparent;
+}
+
+.driver-overlay,
+.driver-stage {
+  pointer-events: auto;
+}

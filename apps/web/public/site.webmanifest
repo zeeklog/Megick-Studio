@@ -1,0 +1,19 @@
+{
+  "name": "Megick",
+  "short_name": "Megick",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#110f0a",
+  "background_color": "#110f0a",
+  "display": "standalone"
+}

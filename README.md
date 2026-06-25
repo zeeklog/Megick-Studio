@@ -21,8 +21,8 @@
 
 Megick Studio 将 AI 图像生成、AI 视频生成、媒体资产管理、模板运营、模型供应商配置和后台管理整合在一个可自托管的工作台中。开源版聚焦创作链路、模型接入、素材管理和运维后台，适合团队搭建私有化 AIGC 生产环境或作为二次开发基础。
 
-[ecommerce-suite-generate](./examples/ecommerce-suite-generate.gif)
-[video-gen-example](./examples/video-gen-example.gif)
+![ecommerce-suite-generate](./examples/ecommerce-suite-generate.gif)
+![video-gen-example](./examples/video-gen-example.gif)
 
 ## 视频案例
 

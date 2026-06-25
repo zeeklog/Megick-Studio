@@ -4,9 +4,14 @@
   <img src="./logo.png" alt="Megick Studio" width="120" />
 </p>
 
+<p align="center">
+  <strong>Open-source AI image and video creation platform with 100+ model support</strong>
+</p>
 
 <p align="center">
-  <strong>支持100+模型的开源 AI 图像与视频创作平台</strong>
+  <strong>English</strong>
+  ·
+  <a href="./README.zh-CN.md">简体中文</a>
 </p>
 
 <p align="center">
@@ -14,54 +19,54 @@
   ·
   <a href="https://github.com/zeeklog/megick-studio">GitHub</a>
   ·
-  <a href="#快速开始">Quick Start</a>
+  <a href="#quick-start">Quick Start</a>
   ·
-  <a href="#技术栈">Tech Stack</a>
+  <a href="#tech-stack">Tech Stack</a>
 </p>
 
-Megick Studio 将 AI 图像生成、AI 视频生成、媒体资产管理、模板运营、模型供应商配置和后台管理整合在一个可自托管的工作台中。聚焦创作链路、模型接入、素材管理和运维后台，适合团队搭建私有化 AIGC 生产环境或作为二次开发基础。
+Megick Studio brings AI image generation, AI video generation, media asset management, template operations, model provider configuration, and admin tooling into one self-hostable creative workspace. It focuses on creation workflows, model access, asset management, and operations so teams can build private AIGC production environments or use it as a foundation for secondary development.
 
-## 视频案例
+## Video Example
 
 ![video-gen-example](./examples/video-gen-example.gif)
 
+## UI Preview
 
-## 界面预览
-
-| 首页 | 图像生成 |
+| Home | Image Generation |
 | --- | --- |
 | ![Megick Home](./examples/home.png) | ![Megick Image Generate](./examples/image-ai-gen.png) |
 
-| 视频生成 | 视频编辑 |
+| Video Generation | Video Editor |
 | --- | --- |
 | ![Megick Video Generate](./examples/video-ai-gen.png) | ![Megick Video Edit](./examples/video-edit.png) |
 
-## 核心能力
+## Core Features
+
 ![ecommerce-suite-generate](./examples/ecommerce-suite-generate.gif)
 
-- AI 图像工作台：支持文生图、参考图生成、图像编辑等常见创作流程。
-- AI 视频工作台：支持文生视频、图生视频，并通过站点配置控制开放能力。
-- 模板中心：支持公开模板、分类管理、审核发布和后台运营。
-- 媒体中心：统一管理生成结果、用户上传素材和 OSS/R2 媒体引用。
-- MegickCut：浏览器端视频编辑器，提供时间线、字幕和导出能力。
-- 管理后台：覆盖用户、角色、模型、供应商、模板、存储、队列、审计日志和站点设置。
-- 积分体系：支持后台人工调整用户积分，不包含在线支付购买流程。
+- AI image studio: text-to-image, reference-image generation, image editing, and common creative workflows.
+- AI video studio: text-to-video and image-to-video, controlled by site settings.
+- Template center: public templates, category management, review, publishing, and admin operations.
+- Media center: unified management for generated outputs, user uploads, and OSS/R2 media references.
+- MegickCut: browser-based video editor with timeline, subtitles, and export workflows.
+- Admin console: users, roles, models, providers, templates, storage, queues, audit logs, and site settings.
+- Credits system: administrator-managed credit adjustments, without a built-in online purchase flow.
 
-## 架构设计图
+## Architecture Diagram
 
-![Megick Studio 架构设计图](./docs/megick-architecture-cyberpunk.png)
+![Megick Studio Architecture Diagram](./docs/megick-architecture-cyberpunk.png)
 
-## 技术栈
+## Tech Stack
 
-| 层级 | 技术 |
+| Layer | Technology |
 | --- | --- |
 | Web | TanStack Start, React 19, Tailwind CSS 4, shadcn/ui |
 | API | NestJS 11, Prisma, MySQL 8, BullMQ, Redis |
-| Storage | Aliyun OSS 默认存储；Cloudflare R2 仅在明确配置或需求指定时使用 |
+| Storage | Aliyun OSS by default; Cloudflare R2 only when explicitly configured or required |
 | Desktop | Electron desktop wrapper |
 | Workspace | pnpm workspaces |
 
-## 仓库结构
+## Repository Structure
 
 ```text
 megick-studio/
@@ -78,23 +83,23 @@ megick-studio/
 └── pnpm-workspace.yaml
 ```
 
-## 环境要求
+## Requirements
 
-- Node.js 22 推荐；Node.js 20+ 通常可用。
-- pnpm 9.12.0。
-- MySQL 8。
-- Redis 6+。
-- Aliyun OSS bucket。Cloudflare R2 是可选能力，仅在明确需要时配置。
+- Node.js 22 recommended; Node.js 20+ usually works.
+- pnpm 9.12.0.
+- MySQL 8.
+- Redis 6+.
+- Aliyun OSS bucket. Cloudflare R2 is optional and should only be configured when explicitly needed.
 
-## 快速开始
+## Quick Start
 
-### 1. 安装依赖
+### 1. Install Dependencies
 
 ```bash
 pnpm install
 ```
 
-### 2. 准备环境变量
+### 2. Prepare Environment Variables
 
 ```bash
 cp .env.example .env
@@ -102,20 +107,20 @@ cp apps/api/.env.example apps/api/.env.development.local
 cp apps/web/.env.example apps/web/.env.development.local
 ```
 
-本地开发数据库操作请使用 `apps/api/.env.development.local` 中的 `DATABASE_URL`。不要提交真实数据库、OSS、模型供应商或 OAuth 密钥。
+For local database operations, use the `DATABASE_URL` from `apps/api/.env.development.local`. Do not commit real database, OSS, model provider, or OAuth secrets.
 
-最少需要配置：
+Minimum required configuration:
 
-| 变量 | 说明 |
+| Variable | Description |
 | --- | --- |
-| `DATABASE_URL` | MySQL 连接字符串 |
-| `REDIS_HOST` / `REDIS_PORT` | Redis 连接信息 |
-| `APP_ENCRYPTION_KEY` | 用于加密第三方密钥，建议 `openssl rand -base64 32` 生成 |
-| `SESSION_SECRET` | 会话签名密钥，建议 `openssl rand -base64 32` 生成 |
-| `OSS_REGION` / `OSS_BUCKET` / `OSS_ACCESS_KEY_ID` / `OSS_ACCESS_KEY_SECRET` | Aliyun OSS 配置 |
-| `WEB_BASE_URL` / `API_BASE_URL` / `PUBLIC_BASE_URL` | 本地或部署后的公开访问地址 |
+| `DATABASE_URL` | MySQL connection string |
+| `REDIS_HOST` / `REDIS_PORT` | Redis connection settings |
+| `APP_ENCRYPTION_KEY` | Encrypts third-party secrets; `openssl rand -base64 32` is recommended |
+| `SESSION_SECRET` | Session signing secret; `openssl rand -base64 32` is recommended |
+| `OSS_REGION` / `OSS_BUCKET` / `OSS_ACCESS_KEY_ID` / `OSS_ACCESS_KEY_SECRET` | Aliyun OSS configuration |
+| `WEB_BASE_URL` / `API_BASE_URL` / `PUBLIC_BASE_URL` | Local or deployed public URLs |
 
-### 3. 初始化数据库
+### 3. Initialize the Database
 
 ```bash
 pnpm prisma:generate
@@ -123,34 +128,34 @@ pnpm --filter @megick/api prisma:migrate:dev
 pnpm prisma:seed
 ```
 
-默认种子管理员：
+Default seed administrator:
 
 ```text
 Email: administrator@megick.com
 Password: PleaseChangeMe!2026
 ```
 
-首次登录后请立即修改默认密码。
+Change the default password immediately after first login.
 
-### 4. 启动开发服务
+### 4. Start Development Services
 
-分别启动 API 和 Web：
+Start API and Web separately:
 
 ```bash
 pnpm dev:api
 pnpm dev:web
 ```
 
-默认地址：
+Default URLs:
 
-| 服务 | 地址 |
+| Service | URL |
 | --- | --- |
 | API | http://localhost:3001 |
 | Web | http://localhost:8080 |
 | Admin | http://localhost:8080/admin |
 | Swagger | http://localhost:3001/api/docs |
 
-## 常用命令
+## Common Commands
 
 ```bash
 pnpm dev:api
@@ -167,9 +172,9 @@ pnpm openapi:emit
 pnpm openapi:types
 ```
 
-当修改 Prisma schema 或新增迁移时，必须生成 Prisma client、对当前数据库执行或检查迁移，并验证受影响的 API endpoint 或查询；不要只依赖 typecheck。
+When changing the Prisma schema or adding migrations, always generate the Prisma client, apply or check migrations against the active database, and verify the affected API endpoint or query. Do not rely on typecheck alone for database shape changes.
 
-## 生产构建
+## Production Build
 
 ```bash
 pnpm build
@@ -177,27 +182,26 @@ pnpm prisma:migrate
 pm2 start ecosystem.config.cjs
 ```
 
-也可以使用仓库脚本执行 PM2 部署：
+You can also use the repository deployment script:
 
 ```bash
 pnpm pm2:deploy
 ```
 
-NestJS API 可作为入口服务托管构建后的 Web 应用。若通过 Nginx 代理，请根据媒体上传和桌面安装包分发需求配置足够的 `client_max_body_size`。
+The NestJS API can serve the built Web application as the entry service. If you put Nginx in front, configure enough `client_max_body_size` for media uploads and desktop installer delivery.
 
+## Model Providers and Generation Protocols
 
-## 模型供应商与生成协议
+Megick Studio uses explicit provider API styles to describe model provider protocols. Current persisted styles include `OPENAI` and `CREX`; generation jobs snapshot provider base URL, status URL, model name, params, and protocol style.
 
-Megick Studio 使用显式的 provider API style 描述模型供应商协议。当前持久化配置包含 `OPENAI` 和 `CREX`，生成任务会快照供应商的 base URL、status URL、模型名、参数和协议风格。
+Image generation adapter logic lives in `apps/api/src/modules/generation/text2image.adapters.ts`. When adding a new provider, explicitly handle reference image mapping, async polling, output parsing, and OSS persistence instead of inferring behavior only from the vendor name.
 
-图像生成适配逻辑位于 `apps/api/src/modules/generation/text2image.adapters.ts`。接入新供应商时，请明确处理参考图映射、异步任务轮询、输出解析和 OSS 持久化，不要仅按厂商名称隐式推断协议。
+## Storage Policy
 
-## 存储策略
+The project supports Aliyun OSS and Cloudflare R2 buckets. The global default storage bucket is Aliyun OSS. Unless a product requirement or user request explicitly specifies Cloudflare R2, uploads, generated media persistence, user assets, product materials, and admin media should use the existing OSS flow.
 
-项目支持 Aliyun OSS 和 Cloudflare R2 两类 bucket。全局默认存储为 Aliyun OSS；除非产品需求或用户明确指定使用 Cloudflare R2，否则上传、生成媒体持久化、用户素材、产品物料和后台媒体都应走项目现有 OSS 流程。
+## Contributing
 
-## 贡献
+Issues and pull requests are welcome: <https://github.com/zeeklog/megick-studio>
 
-欢迎通过 Issue 和 Pull Request 参与改进：<https://github.com/zeeklog/megick-studio>
-
-提交 PR 前，请运行相关 typecheck。若变更影响数据库或 API shape，请同时提交 Prisma/OpenAPI 的必要更新，并说明验证过的接口或查询。
+Before submitting a PR, run the relevant typecheck. If your change affects the database or API shape, include the necessary Prisma/OpenAPI updates and describe the endpoint or query you verified.

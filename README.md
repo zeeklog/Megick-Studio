@@ -2,11 +2,13 @@
 
 <p align="center">
   <img src="./logo.png" alt="Megick Studio" width="120" />
-  <video src="./examples/video-examples.mp4"></video>
 </p>
 
+[ecommerce-suite-generate](./examples/ecommerce-suite-generate.gif)
+[video-gen-example](./examples/video-gen-example.gif)
+
 <p align="center">
-  <strong>面向自托管场景的开源 AI 图像与视频创作平台</strong>
+  <strong>支持100+模型的开源 AI 图像与视频创作平台</strong>
 </p>
 
 <p align="center">

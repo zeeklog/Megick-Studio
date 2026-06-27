@@ -141,7 +141,7 @@ model User {
 model Profile {
   userId                     String                 @id
   displayName                String                 @default("Creator")
-  avatarUrl                  String?                @db.VarChar(512)
+  avatarUrl                  String?                @db.Text
   locale                     String                 @default("en") @db.VarChar(16)
   localeSource               String                 @default("device") @db.VarChar(16)
   localeUpdatedAt            DateTime?
@@ -161,7 +161,7 @@ model OAuthAccount {
   providerUserId  String            @db.VarChar(191)
   email           String?           @db.VarChar(191)
   displayName     String?           @db.VarChar(191)
-  avatarUrl       String?           @db.VarChar(512)
+  avatarUrl       String?           @db.Text
   accessTokenEnc  String?           @db.Text
   refreshTokenEnc String?           @db.Text
   expiresAt       DateTime?

@@ -146,39 +146,6 @@ function RootShell({ children }: { children: React.ReactNode }) {
     <html lang={locale} className={theme === "dark" ? "dark" : ""} suppressHydrationWarning>
       <head>
         <HeadContent />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function(){
-                window.dataLayer = window.dataLayer || [];
-                window.gtag = window.gtag || function(){dataLayer.push(arguments);};
-                var run = function(){
-                  var gtagScript = document.createElement('script');
-                  gtagScript.async = true;
-                  gtagScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-EVZWS6K1VT';
-                  document.head.appendChild(gtagScript);
-                  gtag('js', new Date());
-                  gtag('config', 'G-EVZWS6K1VT');
-
-                  var statsScript = document.createElement('script');
-                  statsScript.defer = true;
-                  statsScript.src = 'https://stats.zeeklog.com/script.js';
-                  statsScript.setAttribute('data-website-id', 'a0fa2711-5925-480b-add2-86cb5f88bcd0');
-                  document.head.appendChild(statsScript);
-                };
-                var schedule = function(){
-                  if ('requestIdleCallback' in window) {
-                    window.requestIdleCallback(run, { timeout: 5000 });
-                  } else {
-                    window.setTimeout(run, 3000);
-                  }
-                };
-                if (document.readyState === 'complete') schedule();
-                else window.addEventListener('load', schedule, { once: true });
-              })();
-            `,
-          }}
-        />
       </head>
       <body>
         {children}

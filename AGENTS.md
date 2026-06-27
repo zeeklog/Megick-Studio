@@ -7,10 +7,10 @@
 ## Model Provider API Styles
 
 - Model providers are configured with an explicit `apiStyle`, which describes the provider interface contract, not just the vendor name.
-- The current persisted provider styles are `OPENAI` and `CREX` in `model_provider_configs.apiStyle`, with generation jobs snapshotting `providerApiStyleSnapshot`, `providerBaseUrlSnapshot`, `providerStatusUrlSnapshot`, `providerModelNameSnapshot`, and `providerParamsSnapshot`.
+- The current persisted provider styles are `OPENAI` and `ALIYUN` in `model_provider_configs.apiStyle`, with generation jobs snapshotting `providerApiStyleSnapshot`, `providerBaseUrlSnapshot`, `providerStatusUrlSnapshot`, `providerModelNameSnapshot`, and `providerParamsSnapshot`.
 - Per-model or per-mode `defaultParams.apiStyle` may further select a sub-adapter such as `dpi-chat-completions`, `bfl-fill`, `flux2-edit`, or video-specific styles. Treat those as request protocol selectors and do not collapse them into the provider enum.
 - For text-to-image, adapter selection lives in `apps/api/src/modules/generation/text2image.adapters.ts`. When fixing reference image behavior, verify the selected adapter, request URL, and payload shape together.
-- CREX image generation compatible with `../chatgpt2api` expects `/v1/images/generations` style requests with `reference_images: string[]`; do not send reference images only as chat-completion `messages[].content[].image_url` unless the model is explicitly configured for a chat-completions style adapter.
+- ALIYUN image generation compatible with `../chatgpt2api` expects `/v1/images/generations` style requests with `reference_images: string[]`; do not send reference images only as chat-completion `messages[].content[].image_url` unless the model is explicitly configured for a chat-completions style adapter.
 - If introducing a new provider protocol, add or update the adapter explicitly and document how it maps reference images, async task polling, output parsing, and OSS persistence.
 
 ## Performance Optimization Rules

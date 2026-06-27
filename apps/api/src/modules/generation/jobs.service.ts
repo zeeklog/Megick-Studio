@@ -314,7 +314,7 @@ function stringParam(value: unknown): string | undefined {
 
 function normalizeApiStyle(value: unknown): ModelProviderApiStyle {
   if (value === "VOLCENGINE") return "VOLCENGINE";
-  return value === "CREX" ? "CREX" : "OPENAI";
+  return value === "ALIYUN" ? "ALIYUN" : "OPENAI";
 }
 
 function pollNumberParam(value: unknown, fallback: number, min: number, max: number) {
@@ -1406,12 +1406,12 @@ export class JobsService {
 
     let invocation = await this.text2ImageInvocationForJob(job);
     if (invocation.apiStyle === "OPENAI" && !invocation.statusUrl) {
-      const legacyCrexInvocation = await this.legacyCrexInvocationForJob(
+      const legacyAliyunInvocation = await this.legacyAliyunInvocationForJob(
         job,
         invocation,
       );
-      if (legacyCrexInvocation) {
-        invocation = legacyCrexInvocation;
+      if (legacyAliyunInvocation) {
+        invocation = legacyAliyunInvocation;
       }
     }
 
@@ -1990,7 +1990,7 @@ export class JobsService {
     return { jobId: job.id, action: "failed", reason: errorMessage };
   }
 
-  private async legacyCrexInvocationForJob<TJob extends GenerationJob>(
+  private async legacyAliyunInvocationForJob<TJob extends GenerationJob>(
     job: TJob,
     fallback: Text2ImageInvocation,
   ): Promise<Text2ImageInvocation | null> {
@@ -1998,7 +1998,7 @@ export class JobsService {
       return null;
     }
     const providerConfig = await this.prisma.modelProviderConfig.findFirst({
-      where: { apiStyle: "CREX", isActive: true },
+      where: { apiStyle: "ALIYUN", isActive: true },
       orderBy: [{ sortOrder: "asc" }, { name: "asc" }],
       select: { id: true },
     });

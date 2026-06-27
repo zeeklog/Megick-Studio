@@ -18,7 +18,7 @@ export type GenerationJobType = "TEXT2IMAGE" | "IMAGE2VIDEO" | "IMAGE_EDIT";
 export type AIModelCategory = "TEXT" | "TEXT2IMAGE" | "IMAGE2VIDEO";
 export type VideoModelInputMode = "T2V" | "I2V" | "R2V" | "EDIT";
 export type ImageModelInputMode = "T2I" | "I2I" | "EDIT";
-export type ModelProviderApiStyle = "OPENAI" | "CREX" | "VOLCENGINE";
+export type ModelProviderApiStyle = "OPENAI" | "ALIYUN" | "VOLCENGINE";
 
 export type ShowcaseItemType = "TEXT2IMAGE" | "IMAGE2VIDEO";
 

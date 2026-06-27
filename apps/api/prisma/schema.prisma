@@ -75,7 +75,7 @@ enum AIModelAccessLevel {
 
 enum ModelProviderApiStyle {
   OPENAI
-  CREX
+  ALIYUN
   VOLCENGINE
 }
 

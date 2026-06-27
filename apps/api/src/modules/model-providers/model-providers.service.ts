@@ -3,7 +3,7 @@ import { PrismaService } from "nestjs-prisma";
 import { CryptoService } from "@/common/services/crypto.service";
 import type { Prisma } from "@prisma/client";
 
-export type ModelProviderApiStyle = "OPENAI" | "CREX" | "VOLCENGINE";
+export type ModelProviderApiStyle = "OPENAI" | "ALIYUN" | "VOLCENGINE";
 export type Text2ImageProviderApiStyle = ModelProviderApiStyle;
 
 export interface ModelProviderUpsertInput {
@@ -58,7 +58,7 @@ function normalizeProviderApiStyle(
   if (typeof value === "string") {
     const normalized = value.trim().toUpperCase();
     if (normalized === "VOLCENGINE") return "VOLCENGINE";
-    if (normalized === "CREX") return "CREX";
+    if (normalized === "ALIYUN") return "ALIYUN";
     if (normalized === "OPENAI") return "OPENAI";
   }
   const marker = (baseUrl ?? "").toLowerCase();
@@ -70,12 +70,12 @@ function normalizeProviderApiStyle(
     return "VOLCENGINE";
   }
   if (
-    marker.includes("crex.cn") ||
+    marker.includes("aliyun.cn") ||
     marker.includes("bpi.") ||
     marker.includes("gpt2api") ||
     marker.includes("chatgpt2api")
   ) {
-    return "CREX";
+    return "ALIYUN";
   }
   return "OPENAI";
 }

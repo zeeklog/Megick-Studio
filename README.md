@@ -192,7 +192,7 @@ The NestJS API can serve the built Web application as the entry service. If you 
 
 ## Model Providers and Generation Protocols
 
-Megick Studio uses explicit provider API styles to describe model provider protocols. Current persisted styles include `OPENAI` and `CREX`; generation jobs snapshot provider base URL, status URL, model name, params, and protocol style.
+Megick Studio uses explicit provider API styles to describe model provider protocols. Current persisted styles include `OPENAI` and `ALIYUN`; generation jobs snapshot provider base URL, status URL, model name, params, and protocol style.
 
 Image generation adapter logic lives in `apps/api/src/modules/generation/text2image.adapters.ts`. When adding a new provider, explicitly handle reference image mapping, async polling, output parsing, and OSS persistence instead of inferring behavior only from the vendor name.
 

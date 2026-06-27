@@ -235,7 +235,7 @@ function inferVideoApiStyle(
   if (lower.includes("volces.com") || lower.includes("volcengine.com")) {
     return "volcengine-video";
   }
-  if (lower.includes("dpi.crex.cn")) return "dpi-chat-completions";
+  if (lower.includes("dpi.aliyun.cn")) return "dpi-chat-completions";
   if (lower.includes("/jobs/createtask")) return "seedance-task";
   if (lower.includes("/v2") || lower.endsWith("/generate"))
     return "seedance-v2";
@@ -1595,7 +1595,7 @@ function resolveText2ImageTaskUrl(
     );
   }
 
-  if (input.apiStyle !== "CREX") return undefined;
+  if (input.apiStyle !== "ALIYUN") return undefined;
 
   if (/\/images\/generations\/?$/i.test(createUrl)) {
     return createUrl.replace(
@@ -1799,9 +1799,9 @@ function shouldDefaultAsyncText2Image(
   const provider = stringParam(input.params.apiStyle ?? input.params.provider);
   if (input.apiStyle === "OPENAI") return false;
   return (
-    input.apiStyle === "CREX" ||
-    provider === "CREX" ||
-    provider === "crex" ||
+    input.apiStyle === "ALIYUN" ||
+    provider === "ALIYUN" ||
+    provider === "aliyun" ||
     provider === "chatgpt2api" ||
     provider === "gpt2api" ||
     provider === "bpi" ||

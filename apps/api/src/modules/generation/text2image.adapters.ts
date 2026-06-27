@@ -9,7 +9,7 @@ export const DIRECT_TEXT2IMAGE_ORIGINS_ENV =
 export interface Text2ImageInput {
   apiKey: string;
   baseUrl: string;
-  apiStyle?: "OPENAI" | "CREX" | "VOLCENGINE";
+  apiStyle?: "OPENAI" | "ALIYUN" | "VOLCENGINE";
   statusUrl?: string | null;
   modelName: string;
   prompt: string;
@@ -359,12 +359,12 @@ function buildOpenAiCompatiblePayload(input: Text2ImageInput) {
   };
 }
 
-function isCrexText2ImageProvider(input: Text2ImageInput) {
+function isAliyunText2ImageProvider(input: Text2ImageInput) {
   const configured = stringParam(input.params.apiStyle ?? input.params.provider);
   if (configured) {
-    return ["CREX", "crex", "bpi", "gpt2api", "chatgpt2api"].includes(configured);
+    return ["ALIYUN", "aliyun", "bpi", "gpt2api", "chatgpt2api"].includes(configured);
   }
-  return input.apiStyle === "CREX";
+  return input.apiStyle === "ALIYUN";
 }
 
 function isMagickApiText2ImageProvider(input: Text2ImageInput) {
@@ -375,7 +375,7 @@ function isMagickApiText2ImageProvider(input: Text2ImageInput) {
 
 function shouldSendAsyncControls(input: Text2ImageInput) {
   return (
-    isCrexText2ImageProvider(input) ||
+    isAliyunText2ImageProvider(input) ||
     Boolean(input.statusUrl) ||
     Boolean(
       stringParam(
@@ -388,7 +388,7 @@ function shouldSendAsyncControls(input: Text2ImageInput) {
   );
 }
 
-function buildCrexText2ImagePayload(input: Text2ImageInput) {
+function buildAliyunText2ImagePayload(input: Text2ImageInput) {
   return {
     ...buildOpenAiCompatiblePayload({
       ...input,
@@ -437,9 +437,9 @@ function isDpiChatCompletionsProvider(input: Text2ImageInput) {
     return true;
   }
 
-  if (input.apiStyle === "CREX") return false;
+  if (input.apiStyle === "ALIYUN") return false;
   const origin = originForUrl(input.baseUrl);
-  return origin === "https://dpi.crex.cn";
+  return origin === "https://dpi.aliyun.cn";
 }
 
 function buildDpiChatCompletionsPayload(input: Text2ImageInput) {
@@ -1400,11 +1400,11 @@ const magickApiText2ImageAdapter: Text2ImageAdapter = {
     parseOpenAiCompatibleResponse(payload, input, "project-oss"),
 };
 
-const crexText2ImageAdapter: Text2ImageAdapter = {
-  name: "crex-text2image",
-  matches: (input) => isCrexText2ImageProvider(input),
+const aliyunText2ImageAdapter: Text2ImageAdapter = {
+  name: "aliyun-text2image",
+  matches: (input) => isAliyunText2ImageProvider(input),
   resolveUrl: (input) => resolveText2ImageUrl(input.baseUrl),
-  buildPayload: buildCrexText2ImagePayload,
+  buildPayload: buildAliyunText2ImagePayload,
   debugPayload: text2ImagePayloadDebug,
   parseResponse: (payload, input) =>
     parseOpenAiCompatibleResponse(payload, input, "project-oss"),
@@ -1424,7 +1424,7 @@ const text2ImageAdapters = [
   flux2EditAdapter,
   volcengineSeedreamAdapter,
   magickApiText2ImageAdapter,
-  crexText2ImageAdapter,
+  aliyunText2ImageAdapter,
   dpiChatCompletionsAdapter,
   directHostedImageAdapter,
   openAiCompatibleAdapter,

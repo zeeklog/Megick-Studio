@@ -192,7 +192,7 @@ NestJS API 可作为入口服务托管构建后的 Web 应用。若通过 Nginx 
 
 ## 模型供应商与生成协议
 
-Megick Studio 使用显式的 provider API style 描述模型供应商协议。当前持久化配置包含 `OPENAI` 和 `CREX`，生成任务会快照供应商的 base URL、status URL、模型名、参数和协议风格。
+Megick Studio 使用显式的 provider API style 描述模型供应商协议。当前持久化配置包含 `OPENAI` 和 `ALIYUN`，生成任务会快照供应商的 base URL、status URL、模型名、参数和协议风格。
 
 图像生成适配逻辑位于 `apps/api/src/modules/generation/text2image.adapters.ts`。接入新供应商时，请明确处理参考图映射、异步任务轮询、输出解析和 OSS 持久化，不要仅按厂商名称隐式推断协议。
 

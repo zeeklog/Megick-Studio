@@ -119,7 +119,7 @@ function asRecord(value: unknown): Record<string, unknown> {
 
 function normalizeApiStyle(value: unknown): ModelProviderApiStyle {
   if (value === "VOLCENGINE") return "VOLCENGINE";
-  return value === "CREX" ? "CREX" : "OPENAI";
+  return value === "ALIYUN" ? "ALIYUN" : "OPENAI";
 }
 
 function pollNumberParam(value: unknown, fallback: number, min: number, max: number) {

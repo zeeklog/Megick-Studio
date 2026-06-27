@@ -137,7 +137,7 @@ function AdminModelProviders() {
                     }
                   >
                     <option value="OPENAI">OPENAI</option>
-                    <option value="CREX">CREX</option>
+                    <option value="ALIYUN">ALIYUN</option>
                     <option value="VOLCENGINE">VOLCENGINE</option>
                   </select>
                 </Field>
@@ -147,7 +147,7 @@ function AdminModelProviders() {
                     onChange={(event) =>
                       setEditing({ ...editing, statusUrl: event.target.value })
                     }
-                    placeholder="https://bpi.crex.cn/v1/images/tasks/{taskId}"
+                    placeholder="https://bpi.aliyun.cn/v1/images/tasks/{taskId}"
                   />
                 </Field>
               </div>

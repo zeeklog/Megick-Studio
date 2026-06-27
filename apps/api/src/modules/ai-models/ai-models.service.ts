@@ -89,7 +89,7 @@ function inferText2ImageApiStyle(
 ): ModelProviderApiStyle {
   const configured = stringParam(params.apiStyle ?? params.provider);
   if (configured?.toUpperCase() === "VOLCENGINE") return "VOLCENGINE";
-  if (configured?.toUpperCase() === "CREX") return "CREX";
+  if (configured?.toUpperCase() === "ALIYUN") return "ALIYUN";
   if (configured?.toUpperCase() === "OPENAI") return "OPENAI";
   const lower = baseUrl.toLowerCase();
   if (
@@ -100,12 +100,12 @@ function inferText2ImageApiStyle(
     return "VOLCENGINE";
   }
   if (
-    lower.includes("crex.cn") ||
+    lower.includes("aliyun.cn") ||
     lower.includes("bpi.") ||
     lower.includes("gpt2api") ||
     lower.includes("chatgpt2api")
   ) {
-    return "CREX";
+    return "ALIYUN";
   }
   return "OPENAI";
 }

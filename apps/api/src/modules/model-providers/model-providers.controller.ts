@@ -14,9 +14,9 @@ class ModelProviderDto {
   @IsString() name!: string;
   @ApiProperty({ example: "https://api.magickapi.com" })
   @IsString() baseUrl!: string;
-  @ApiProperty({ required: false, enum: ["OPENAI", "CREX", "VOLCENGINE"], example: "OPENAI" })
-  @IsOptional() @IsIn(["OPENAI", "CREX", "VOLCENGINE"]) apiStyle?: "OPENAI" | "CREX" | "VOLCENGINE";
-  @ApiProperty({ required: false, example: "https://bpi.crex.cn/v1/images/tasks/{taskId}" })
+  @ApiProperty({ required: false, enum: ["OPENAI", "ALIYUN", "VOLCENGINE"], example: "OPENAI" })
+  @IsOptional() @IsIn(["OPENAI", "ALIYUN", "VOLCENGINE"]) apiStyle?: "OPENAI" | "ALIYUN" | "VOLCENGINE";
+  @ApiProperty({ required: false, example: "https://bpi.aliyun.cn/v1/images/tasks/{taskId}" })
   @IsOptional() @IsString() statusUrl?: string | null;
   @ApiProperty({ required: false, example: 900000 })
   @IsOptional() @IsInt() maxPollDurationMs?: number | null;

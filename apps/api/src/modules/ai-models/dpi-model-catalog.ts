@@ -14,7 +14,7 @@ export interface BuiltInAiModelDefinition {
   description?: string;
 }
 
-const DPI_DEFAULT_BASE_URL = "https://dpi.crex.cn/v1";
+const DPI_DEFAULT_BASE_URL = "https://dpi.aliyun.cn/v1";
 
 const dpiImageModelNames = [
   "gemini-2.5-flash-image-landscape",
